@@ -31,3 +31,4 @@ replay_pid*
 *.dia.autosave
 *.dia~
 *.txt
+/.vscode
