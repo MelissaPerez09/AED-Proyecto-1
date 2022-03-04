@@ -16,22 +16,78 @@ public class Parser {
             String a = datos[2];
             String b = datos[3];
 
-            if(a.contains(".") || b.contains(".")){
-                // Número con decimales
-                double x = Double.parseDouble(a);
-                double y = Double.parseDouble(b);
+            if(Objects.equals(datos[1], "+")){
+                if(a.contains(".") || b.contains(".")){
+                    // Número con decimales
+                    double x = Double.parseDouble(a);
+                    double y = Double.parseDouble(b);
 
-                double resultado = Aritmeticos.add(x, y);
+                    double resultado = Aritmeticos.add(x, y);
 
-                return Double.toString(resultado);
-            } else{
-                // Número entero
-                int x = Integer.parseInt(a);
-                int y = Integer.parseInt(b);
+                    return Double.toString(resultado);
+                } else{
+                    // Número entero
+                    int x = Integer.parseInt(a);
+                    int y = Integer.parseInt(b);
 
-                int resultado = Aritmeticos.add(x, y);
+                    int resultado = Aritmeticos.add(x, y);
 
-                return Integer.toString(resultado);
+                    return Integer.toString(resultado);
+                }
+            } else if(Objects.equals(datos[1], "-")){
+                if(a.contains(".") || b.contains(".")){
+                    // Número con decimales
+                    double x = Double.parseDouble(a);
+                    double y = Double.parseDouble(b);
+
+                    double resultado = Aritmeticos.sub(x, y);
+
+                    return Double.toString(resultado);
+                } else{
+                    // Número entero
+                    int x = Integer.parseInt(a);
+                    int y = Integer.parseInt(b);
+
+                    int resultado = Aritmeticos.sub(x, y);
+
+                    return Integer.toString(resultado);
+                }
+            } else if(Objects.equals(datos[1], "/")){
+                if(a.contains(".") || b.contains(".")){
+                    // Número con decimales
+                    double x = Double.parseDouble(a);
+                    double y = Double.parseDouble(b);
+
+                    double resultado = Aritmeticos.div(x, y);
+
+                    return Double.toString(resultado);
+                } else{
+                    // Número entero
+                    int x = Integer.parseInt(a);
+                    int y = Integer.parseInt(b);
+
+                    int resultado = Aritmeticos.div(x, y);
+
+                    return Integer.toString(resultado);
+                }
+            } else if(Objects.equals(datos[1], "*")){
+                if(a.contains(".") || b.contains(".")){
+                    // Número con decimales
+                    double x = Double.parseDouble(a);
+                    double y = Double.parseDouble(b);
+
+                    double resultado = Aritmeticos.mult(x, y);
+
+                    return Double.toString(resultado);
+                } else{
+                    // Número entero
+                    int x = Integer.parseInt(a);
+                    int y = Integer.parseInt(b);
+
+                    int resultado = Aritmeticos.mult(x, y);
+
+                    return Integer.toString(resultado);
+                }
             }
 
         }
