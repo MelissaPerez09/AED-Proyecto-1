@@ -1,3 +1,12 @@
+/**
+ * Esta es la clase que evalúa una operación del lenguaje LISP
+ * Universidad del Valle de Guatemala
+ * @author: Mark Albrand
+ * @author: Jimena Hernández
+ * @author: Emily Pérez
+ * @version: 2-mar-22
+ */
+
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -93,6 +102,7 @@ public class Parser {
             }
 
         }
+
         // Operaciones aritméticas simples (Una variable)
         pattern = Pattern.compile("^[(]{1}[+\\-]{2} [0-9]+[)]{1}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);

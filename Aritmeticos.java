@@ -1,15 +1,10 @@
-
 /**
+ * Desarrolla las operaciones aritmeticas, con o sin decimales
  * Universidad del Valle de Guatemala
  * @author Jimena Hernandez/21199
  * @author Mark Albrand/21004
  * @author Emily Perez/21385
  * @version 03/03/2022
- * Algoritmos y estructuras de Datos 
- * Proyecto 01 - interprete LISP
- * 
- * Aritmeticos.java 
- * Desarrolla las operaciones aritmeticas
  */
 
 public class Aritmeticos{
