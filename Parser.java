@@ -22,7 +22,7 @@ public class Parser {
         Matcher matcher;
 
         // Operaciones aritméticas simples
-        pattern = Pattern.compile("^[(]{1}[+*-/]{1} [0-9]+ [0-9]+[)]{1}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
+        pattern = Pattern.compile("^[(]{1}[+*-/]{1} [0-9.]+ [0-9.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);
 
         if(matcher.find()){
