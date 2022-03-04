@@ -12,7 +12,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    public String parse(String linea){
+    /**
+     * Método principal para evaluar una línea a código LISP
+     * @param linea Línea ingresada por el usuario
+     * @return El resultado de la operación en formato String
+     */
+    public static String parse(String linea){
         Pattern pattern;
         Matcher matcher;
 
