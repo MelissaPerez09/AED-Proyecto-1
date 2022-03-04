@@ -48,19 +48,19 @@ public class Aritmeticos{
     }
 
     public static double incr (double x){
-        return x ++;
+        return ++x;
     }
 
     public static int incr (int x){
-        return x ++;
+        return ++x;
     }
 
     public static double decr (double x){
-        return x--;
+        return --x;
     }
 
     public static int decr (int x){
-        return x--;
+        return --x;
     }
 
     public static double abs (double x){

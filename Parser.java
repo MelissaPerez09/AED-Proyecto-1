@@ -94,14 +94,16 @@ public class Parser {
 
         }
         // Operaciones aritméticas simples (Una variable)
-        pattern = Pattern.compile("^[(]{1}[+\\-]{2} [0-9]+[)]{1}$\n", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
+        pattern = Pattern.compile("^[(]{1}[+\\-]{2} [0-9]+[)]{1}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);
 
         if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
             String[] datos = linea.split(" ");
             String a = datos[1];
 
-            if(Objects.equals(datos[1], "++")){
+            if(Objects.equals(datos[0], "++")){
                 if(a.contains(".")){
                     double x = Double.parseDouble(a);
 
@@ -115,7 +117,7 @@ public class Parser {
 
                     return Integer.toString(resultado);
                 }
-            }else {
+            }else if (Objects.equals(datos[0], "--")){
                 if(a.contains(".")){
                     double x = Double.parseDouble(a);
 
