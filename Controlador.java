@@ -13,14 +13,14 @@ public class Controlador {
     **/ 
     private static Vista vista = new Vista();
     public static void main(String[] args){
-        Parser parser= new Parser();
         String input= "";
 
         vista.inicio();
         input= vista.getOperacion();
+
         while(!input.equals("(EXIT)")){
 
-            vista.mensaje(parser.parse(input));
+            vista.mensaje(Parser.parse(input));
             input= vista.getOperacion();
         }
         vista.salida();
