@@ -41,6 +41,19 @@ public class Vista {
         return operacion;
     }
 
+    /**
+    * metodo para salir 
+    * 
+    */
+    public void salida(){
+
+        String salidatexto= scan.nextLine();
+
+        if(salidatexto == "(EXIT)"){
+           mensaje(">>>");
+           System.exit(0);
+        }
+    }  
     
 
 

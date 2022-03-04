@@ -13,7 +13,9 @@ public class Controlador {
     **/ 
     private static Vista vista = new Vista();
     public static void main(String[] args){
-        
+
+        vista.inicio();
+        vista.getOperacion();
     }
 
 }
