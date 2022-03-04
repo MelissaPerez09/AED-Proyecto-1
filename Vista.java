@@ -17,7 +17,7 @@ public class Vista {
      * @param mensaje Mensaje a imprimir
      */
     public void mensaje(String mensaje){
-        System.out.println(mensaje);
+        System.out.print(mensaje);
     }
 
     /**
