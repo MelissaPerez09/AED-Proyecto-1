@@ -12,6 +12,8 @@ public class Controlador {
     * Main del programa.
     **/ 
     private static Vista vista = new Vista();
+    private static Parser parser = new Parser();
+
     public static void main(String[] args){
         String input= "";
 
@@ -20,7 +22,7 @@ public class Controlador {
 
         while(!input.equals("(EXIT)")){
 
-            vista.mensaje(Parser.parse(input));
+            vista.mensaje(parser.parse(input));
             input= vista.getOperacion();
         }
         vista.salida();
