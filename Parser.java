@@ -29,6 +29,6 @@ public class Parser {
                 return "";
             }
         }
-        return "Expresión inválida. Ingrese (EXIT) para salir.";
+        return "Expresión inválida. Ingrese '(EXIT)' para salir.";
     }
 }
