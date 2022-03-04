@@ -12,11 +12,13 @@ public class Parser {
         matcher = pattern.matcher(linea);
 
         if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
             String[] datos = linea.split(" ");
-            String a = datos[2];
-            String b = datos[3];
+            String a = datos[1];
+            String b = datos[2];
 
-            if(Objects.equals(datos[1], "+")){
+            if(Objects.equals(datos[0], "+")){
                 if(a.contains(".") || b.contains(".")){
                     // Número con decimales
                     double x = Double.parseDouble(a);
@@ -34,7 +36,7 @@ public class Parser {
 
                     return Integer.toString(resultado);
                 }
-            } else if(Objects.equals(datos[1], "-")){
+            } else if(Objects.equals(datos[0], "-")){
                 if(a.contains(".") || b.contains(".")){
                     // Número con decimales
                     double x = Double.parseDouble(a);
@@ -52,7 +54,7 @@ public class Parser {
 
                     return Integer.toString(resultado);
                 }
-            } else if(Objects.equals(datos[1], "/")){
+            } else if(Objects.equals(datos[0], "/")){
                 if(a.contains(".") || b.contains(".")){
                     // Número con decimales
                     double x = Double.parseDouble(a);
@@ -70,7 +72,7 @@ public class Parser {
 
                     return Integer.toString(resultado);
                 }
-            } else if(Objects.equals(datos[1], "*")){
+            } else if(Objects.equals(datos[0], "*")){
                 if(a.contains(".") || b.contains(".")){
                     // Número con decimales
                     double x = Double.parseDouble(a);
