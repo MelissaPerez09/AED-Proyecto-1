@@ -13,8 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    private static HashMap<String, String> variables = new HashMap<String, String>();
-
+    private HashMap<String, String> variables = new HashMap<String, String>();  // Almacenamiento de las variables personales
 
     /**
      * Método principal para evaluar una línea a código LISP
@@ -153,26 +152,6 @@ public class Parser {
             }
         }
 
-
-        // Definición de variables
-        pattern = Pattern.compile("[(]{1}let [A-z]+ [0-9.]+|[\"]+[A-z]+[\"]+[)]{1}$", Pattern.CASE_INSENSITIVE);  // Regex para una definición de variable
-        matcher = pattern.matcher(linea);
-
-        if(matcher.find()){
-            linea = linea.replace("(", "");
-            linea = linea.replace(")", "");
-
-            String[] datos = linea.split(" ");
-            // 0: let ; 1: nombre ; 2: valor
-            String nombre = datos[1];
-            String valor = datos[2];
-
-            variables.put(nombre, valor);
-
-            return ("Se ha asignado correctamente " + nombre + " con el valor " + valor);
-        }
-
-
         pattern = Pattern.compile("^[(]{1}[<>]{1}[=]{0,1} [0-9.]+ [0-9.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación lógica simple
         matcher = pattern.matcher(linea);
         if(matcher.find()){
@@ -238,7 +217,6 @@ public class Parser {
                     return Boolean.toString(resultado);
                 }
             }
-
         }
 
         pattern = Pattern.compile("^[(]{1}[=]{2} [0-9.]+ [0-9.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación lógica simple
