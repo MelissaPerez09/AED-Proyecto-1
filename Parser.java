@@ -167,13 +167,13 @@ public class Parser {
                     // Número con decimales
                     double x = Double.parseDouble(a);
                     double y = Double.parseDouble(b);
-                    Boolean resultado = Logicas.less(x, y);
+                    boolean resultado = Logicas.less(x, y);
                     return Boolean.toString(resultado);
                 } else{
                     // Número entero
                     int x = Integer.parseInt(a);
                     int y = Integer.parseInt(b);
-                    Boolean resultado = Logicas.less(x, y);
+                    boolean resultado = Logicas.less(x, y);
                     return Boolean.toString(resultado);
                 }
             } else if(Objects.equals(datos[0], ">")){
@@ -181,13 +181,13 @@ public class Parser {
                     // Número con decimales
                     double x = Double.parseDouble(a);
                     double y = Double.parseDouble(b);
-                    Boolean resultado = Logicas.greater(x, y);
+                    boolean resultado = Logicas.greater(x, y);
                     return Boolean.toString(resultado);
                 } else{
                     // Número entero
                     int x = Integer.parseInt(a);
                     int y = Integer.parseInt(b);
-                    Boolean resultado = Logicas.greater(x, y);
+                    boolean resultado = Logicas.greater(x, y);
                     return Boolean.toString(resultado);
                 }
             } else if(Objects.equals(datos[0], "<=")){
@@ -195,13 +195,13 @@ public class Parser {
                     // Número con decimales
                     double x = Double.parseDouble(a);
                     double y = Double.parseDouble(b);
-                    Boolean resultado = Logicas.lessEq(x, y);
+                    boolean resultado = Logicas.lessEq(x, y);
                     return Boolean.toString(resultado);
                 } else{
                     // Número entero
                     int x = Integer.parseInt(a);
                     int y = Integer.parseInt(b);
-                    Boolean resultado = Logicas.lessEq(x, y);
+                    boolean resultado = Logicas.lessEq(x, y);
                     return Boolean.toString(resultado);
                 }
             } else if(Objects.equals(datos[0], ">=")){
@@ -209,13 +209,13 @@ public class Parser {
                     // Número con decimales
                     double x = Double.parseDouble(a);
                     double y = Double.parseDouble(b);
-                    Boolean resultado = Logicas.greaterEq(x, y);
+                    boolean resultado = Logicas.greaterEq(x, y);
                     return Boolean.toString(resultado);
                 } else{
                     // Número entero
                     int x = Integer.parseInt(a);
                     int y = Integer.parseInt(b);
-                    Boolean resultado = Logicas.greaterEq(x, y);
+                    boolean resultado = Logicas.greaterEq(x, y);
                     return Boolean.toString(resultado);
                 }
             }
@@ -236,13 +236,13 @@ public class Parser {
                     // Número con decimales
                     double x = Double.parseDouble(a);
                     double y = Double.parseDouble(b);
-                    Boolean resultado = Logicas.equal(x, y);
+                    boolean resultado = Logicas.equal(x, y);
                     return Boolean.toString(resultado);
                 } else{
                     // Número entero
                     int x = Integer.parseInt(a);
                     int y = Integer.parseInt(b);
-                    Boolean resultado = Logicas.equal(x, y);
+                    boolean resultado = Logicas.equal(x, y);
                     return Boolean.toString(resultado);
                 }
             }
