@@ -13,18 +13,18 @@ public class Vista {
     private Scanner scan = new Scanner(System.in);
 
     /**
-    * @param: String
-    * imprime texto
-    **/ 
+     * Método para imprimir un mensaje
+     * @param mensaje Mensaje a imprimir
+     */
     public void mensaje(String mensaje){
-        System.out.println(mensaje);
+        System.out.print(mensaje);
     }
 
     /**
      * Bienvenida del interprete
      */
     public void inicio(){
-        System.out.println("\n Interprete Lisp 0.1.0 (Grupo 5) AED ");
+        System.out.println("\n Interprete Lisp v0.1.0 (Grupo 5) AED ");
     }
 
     /**
@@ -33,13 +33,12 @@ public class Vista {
      */
     public String getOperacion(){
 
-        System.out.printf("\n >>> ");
-        String operacion = scan.nextLine();
-        return operacion;
+        mensaje("\n >>> ");
+        return scan.nextLine();
     }
 
     /**
-    * metodo para salir 
+    * Método para salir del programa
     * 
     */
     public void salida(){
