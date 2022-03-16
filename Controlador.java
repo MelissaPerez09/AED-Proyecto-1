@@ -21,9 +21,14 @@ public class Controlador {
         input= vista.getOperacion();
 
         while(!input.equals("(EXIT)")){
-
+            if(input.equals("(HELP)")){
+                vista.ayuda();
+                input= vista.getOperacion();
+                continue;
+            }else{
             vista.mensaje(parser.parse(input));
             input= vista.getOperacion();
+            }
         }
         vista.salida();
         

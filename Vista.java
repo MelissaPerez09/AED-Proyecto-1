@@ -24,7 +24,7 @@ public class Vista {
      * Bienvenida del interprete
      */
     public void inicio(){
-        System.out.println("\n Interprete Lisp v0.1.0 (Grupo 5) AED ");
+        System.out.println("\n Interprete Lisp v0.2.0 (Grupo 5) AED \n Ingrese '(HELP)' para ayuda. ");
     }
 
     /**
@@ -42,13 +42,17 @@ public class Vista {
     * 
     */
     public void salida(){
-
         mensaje("\n >>> ");
         System.exit(0);
-
     }  
-    
 
-
+    /**
+    * Método para pedir ayuda
+    * 
+    */
+    public void ayuda(){
+        mensaje("\n >>>Help: ");
+        mensaje("\n Para definir una operacion debe ingresarlas en formato lisp. Ejemplo: (+ 2 3)\n Para definir una variable debe ingresarla de la siguiente forma: (let nombredelavaribale valordelavariable)");
+    }
 
 }
