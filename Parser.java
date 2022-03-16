@@ -153,26 +153,6 @@ public class Parser {
             }
         }
 
-
-        // Definición de variables
-        pattern = Pattern.compile("[(]{1}let [A-z]+ [0-9.]+|[\"]+[A-z]+[\"]+[)]{1}$", Pattern.CASE_INSENSITIVE);  // Regex para una definición de variable
-        matcher = pattern.matcher(linea);
-
-        if(matcher.find()){
-            linea = linea.replace("(", "");
-            linea = linea.replace(")", "");
-
-            String[] datos = linea.split(" ");
-            // 0: let ; 1: nombre ; 2: valor
-            String nombre = datos[1];
-            String valor = datos[2];
-
-            variables.put(nombre, valor);
-
-            return ("Se ha asignado correctamente " + nombre + " con el valor " + valor);
-        }
-
-
         pattern = Pattern.compile("^[(]{1}[<>]{1}[=]{0,1} [0-9.]+ [0-9.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación lógica simple
         matcher = pattern.matcher(linea);
         if(matcher.find()){
@@ -265,6 +245,26 @@ public class Parser {
                 }
             }
         }
+
+        // Definición de variables
+        pattern = Pattern.compile("[(]{1}let [A-z]+ [0-9.]+|[\"]+[A-z]+[\"]+[)]{1}$", Pattern.CASE_INSENSITIVE);  // Regex para una definición de variable
+        matcher = pattern.matcher(linea);
+
+        if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+
+            String[] datos = linea.split(" ");
+            // 0: let ; 1: nombre ; 2: valor
+            String nombre = datos[1];
+            String valor = datos[2];
+
+            variables.put(nombre, valor);
+
+            return ("Se ha asignado correctamente " + nombre + " con el valor " + valor);
+
+        }
+
         return "Expresión inválida. Ingrese '(EXIT)' para salir.";
     }
 
