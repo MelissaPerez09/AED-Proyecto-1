@@ -150,11 +150,101 @@ public class Parser {
                     return Integer.toString(resultado);
                 }
             }
-
-
         }
 
+        pattern = Pattern.compile("^[(]{1}[<>]{1}[=]{0,1} [0-9.]+ [0-9.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación lógica simple
+        matcher = pattern.matcher(linea);
+        if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+            String a = datos[1];
+            String b = datos[2];
+            if(Objects.equals(datos[0], "<")){
+                if(a.contains(".") || b.contains(".")){
+                    // Número con decimales
+                    double x = Double.parseDouble(a);
+                    double y = Double.parseDouble(b);
+                    Boolean resultado = Logicas.less(x, y);
+                    return Boolean.toString(resultado);
+                } else{
+                    // Número entero
+                    int x = Integer.parseInt(a);
+                    int y = Integer.parseInt(b);
+                    Boolean resultado = Logicas.less(x, y);
+                    return Boolean.toString(resultado);
+                }
+            } else if(Objects.equals(datos[0], ">")){
+                if(a.contains(".") || b.contains(".")){
+                    // Número con decimales
+                    double x = Double.parseDouble(a);
+                    double y = Double.parseDouble(b);
+                    Boolean resultado = Logicas.greater(x, y);
+                    return Boolean.toString(resultado);
+                } else{
+                    // Número entero
+                    int x = Integer.parseInt(a);
+                    int y = Integer.parseInt(b);
+                    Boolean resultado = Logicas.greater(x, y);
+                    return Boolean.toString(resultado);
+                }
+            } else if(Objects.equals(datos[0], "<=")){
+                if(a.contains(".") || b.contains(".")){
+                    // Número con decimales
+                    double x = Double.parseDouble(a);
+                    double y = Double.parseDouble(b);
+                    Boolean resultado = Logicas.lessEq(x, y);
+                    return Boolean.toString(resultado);
+                } else{
+                    // Número entero
+                    int x = Integer.parseInt(a);
+                    int y = Integer.parseInt(b);
+                    Boolean resultado = Logicas.lessEq(x, y);
+                    return Boolean.toString(resultado);
+                }
+            } else if(Objects.equals(datos[0], ">=")){
+                if(a.contains(".") || b.contains(".")){
+                    // Número con decimales
+                    double x = Double.parseDouble(a);
+                    double y = Double.parseDouble(b);
+                    Boolean resultado = Logicas.greaterEq(x, y);
+                    return Boolean.toString(resultado);
+                } else{
+                    // Número entero
+                    int x = Integer.parseInt(a);
+                    int y = Integer.parseInt(b);
+                    Boolean resultado = Logicas.greaterEq(x, y);
+                    return Boolean.toString(resultado);
+                }
+            }
+        }
 
+        pattern = Pattern.compile("^[(]{1}[=]{2} [0-9.]+ [0-9.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación lógica simple
+        matcher = pattern.matcher(linea);
+        if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+            String a = datos[1];
+            String b = datos[2];
+            if(Objects.equals(datos[0], "==")){
+                if(a.contains(".") || b.contains(".")){
+                    // Número con decimales
+                    double x = Double.parseDouble(a);
+                    double y = Double.parseDouble(b);
+                    Boolean resultado = Logicas.equal(x, y);
+                    return Boolean.toString(resultado);
+                } else{
+                    // Número entero
+                    int x = Integer.parseInt(a);
+                    int y = Integer.parseInt(b);
+                    Boolean resultado = Logicas.equal(x, y);
+                    return Boolean.toString(resultado);
+                }
+            }
+        }
         return "Expresión inválida. Ingrese '(EXIT)' para salir.";
     }
+
+
 }
