@@ -152,8 +152,10 @@ public class Parser {
             }
         }
 
+        // Operaciones lógicas simples. Mayor o menor
         pattern = Pattern.compile("^[(]{1}[<>]{1}[=]{0,1} [0-9.]+ [0-9.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación lógica simple
         matcher = pattern.matcher(linea);
+
         if(matcher.find()){
             linea = linea.replace("(", "");
             linea = linea.replace(")", "");
@@ -219,8 +221,10 @@ public class Parser {
             }
         }
 
+        // Operaciones lógicas simples. Igual a
         pattern = Pattern.compile("^[(]{1}[=]{2} [0-9.]+ [0-9.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación lógica simple
         matcher = pattern.matcher(linea);
+
         if(matcher.find()){
             linea = linea.replace("(", "");
             linea = linea.replace(")", "");
