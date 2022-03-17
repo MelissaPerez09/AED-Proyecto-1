@@ -520,7 +520,7 @@ public class Parser {
         }
 
         //operaciones dentro de operaciones con dos paréntesis
-        pattern = Pattern.compile("^[(]{1}[+*\\-/] [(]{1}[+*\\-/] + [0-9.]+ [0-9.][)]{1} [(]{1}[+*\\-/] [0-9.]+ [0-9.]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex
+        pattern = Pattern.compile("^[(]{1}[+*-\\/] [(]{1}[+*-\\/]+ [0-9.]+ [0-9.][)]{1} [(]{1}[+*-\\/] [0-9.]+ [0-9.]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex
         matcher = pattern.matcher(linea);
 
         if (matcher.find()){
@@ -532,9 +532,438 @@ public class Parser {
             String c = datos[5];
             String d = datos[6];
             
+            //evalúa el primer paréntesis con suma
+            if(Objects.equals(datos[1], "+")){
+                if(a.contains(".") || b.contains(".")){
+                    //*******FALTA POR CORREGIR*********/
+                    double x = Double.parseDouble(a);
+                    double y = Double.parseDouble(b);
+                    double resultado = Aritmeticos.add(x, y);
+                    return Double.toString(resultado);
+
+                } else{
+                    // Número entero
+                    Integer x = Integer.parseInt(a);
+                    Integer y = Integer.parseInt(b);
+                    Integer resultado1 = Aritmeticos.add(x, y);
+
+                    //evalúa el segundo paréntesis
+                    if(Objects.equals(datos[4], "+")){
+                        Integer z = Integer.parseInt(c);
+                        Integer w = Integer.parseInt(d);
+                        Integer resultado2 = Aritmeticos.add(z, w);
+                        //evalúa ambos paréntesis
+                        if(Objects.equals(datos[0], "+")){
+                            Integer resultadoF = Aritmeticos.add(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "-")){
+                            Integer resultadoF = Aritmeticos.sub(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "*")){
+                            Integer resultadoF = Aritmeticos.mult(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "/")){
+                            Integer resultadoF = Aritmeticos.div(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                    }
+                    if(Objects.equals(datos[4], "-")){
+                        Integer z = Integer.parseInt(c);
+                        Integer w = Integer.parseInt(d);
+                        Integer resultado2 = Aritmeticos.sub(z, w);
+                        //evalúa ambos paréntesis
+                        if(Objects.equals(datos[0], "+")){
+                            Integer resultadoF = Aritmeticos.add(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "-")){
+                            Integer resultadoF = Aritmeticos.sub(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "*")){
+                            Integer resultadoF = Aritmeticos.mult(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "/")){
+                            Integer resultadoF = Aritmeticos.div(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                    }
+                    if(Objects.equals(datos[4], "*")){
+                        Integer z = Integer.parseInt(c);
+                        Integer w = Integer.parseInt(d);
+                        Integer resultado2 = Aritmeticos.mult(z, w);
+                        //evalúa ambos paréntesis
+                        if(Objects.equals(datos[0], "+")){
+                            Integer resultadoF = Aritmeticos.add(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "-")){
+                            Integer resultadoF = Aritmeticos.sub(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "*")){
+                            Integer resultadoF = Aritmeticos.mult(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "/")){
+                            Integer resultadoF = Aritmeticos.div(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                    }
+                    if(Objects.equals(datos[4], "/")){
+                        Integer z = Integer.parseInt(c);
+                        Integer w = Integer.parseInt(d);
+                        Integer resultado2 = Aritmeticos.div(z, w);
+                       
+                        //evalúa ambos paréntesis
+                        if(Objects.equals(datos[0], "+")){
+                            Integer resultadoF = Aritmeticos.add(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "-")){
+                            Integer resultadoF = Aritmeticos.sub(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "*")){
+                            Integer resultadoF = Aritmeticos.mult(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "/")){
+                            Integer resultadoF = Aritmeticos.div(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                    }
+                }
+            }
+            //evalúa el primer paréntesis con resta
+            if(Objects.equals(datos[1], "-")){
+                if(a.contains(".") || b.contains(".")){
+                    //*******FALTA POR CORREGIR*********/
+                    double x = Double.parseDouble(a);
+                    double y = Double.parseDouble(b);
+                    double resultado = Aritmeticos.sub(x, y);
+                    return Double.toString(resultado);
+
+                } else{
+                    // Número entero
+                    Integer x = Integer.parseInt(a);
+                    Integer y = Integer.parseInt(b);
+                    Integer resultado1 = Aritmeticos.sub(x, y);
+
+                    //evalúa el segundo paréntesis
+                    if(Objects.equals(datos[4], "+")){
+                        Integer z = Integer.parseInt(c);
+                        Integer w = Integer.parseInt(d);
+                        Integer resultado2 = Aritmeticos.add(z, w);
+                        //evalúa ambos paréntesis
+                        if(Objects.equals(datos[0], "+")){
+                            Integer resultadoF = Aritmeticos.add(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "-")){
+                            Integer resultadoF = Aritmeticos.sub(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "*")){
+                            Integer resultadoF = Aritmeticos.mult(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "/")){
+                            Integer resultadoF = Aritmeticos.div(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                    }
+                    if(Objects.equals(datos[4], "-")){
+                        Integer z = Integer.parseInt(c);
+                        Integer w = Integer.parseInt(d);
+                        Integer resultado2 = Aritmeticos.sub(z, w);
+                        //evalúa ambos paréntesis
+                        if(Objects.equals(datos[0], "+")){
+                            Integer resultadoF = Aritmeticos.add(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "-")){
+                            Integer resultadoF = Aritmeticos.sub(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "*")){
+                            Integer resultadoF = Aritmeticos.mult(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "/")){
+                            Integer resultadoF = Aritmeticos.div(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                    }
+                    if(Objects.equals(datos[4], "*")){
+                        Integer z = Integer.parseInt(c);
+                        Integer w = Integer.parseInt(d);
+                        Integer resultado2 = Aritmeticos.mult(z, w);
+                        //evalúa ambos paréntesis
+                        if(Objects.equals(datos[0], "+")){
+                            Integer resultadoF = Aritmeticos.add(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "-")){
+                            Integer resultadoF = Aritmeticos.sub(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "*")){
+                            Integer resultadoF = Aritmeticos.mult(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "/")){
+                            Integer resultadoF = Aritmeticos.div(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                    }
+                    if(Objects.equals(datos[4], "/")){
+                        Integer z = Integer.parseInt(c);
+                        Integer w = Integer.parseInt(d);
+                        Integer resultado2 = Aritmeticos.div(z, w);
+                       
+                        //evalúa ambos paréntesis
+                        if(Objects.equals(datos[0], "+")){
+                            Integer resultadoF = Aritmeticos.add(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "-")){
+                            Integer resultadoF = Aritmeticos.sub(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "*")){
+                            Integer resultadoF = Aritmeticos.mult(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "/")){
+                            Integer resultadoF = Aritmeticos.div(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                    }
+                }
+            }
+
+            //evalúa el primer paréntesis con división
+            if(Objects.equals(datos[1], "/")){
+                if(a.contains(".") || b.contains(".")){
+                    //*******FALTA POR CORREGIR*********/
+                    double x = Double.parseDouble(a);
+                    double y = Double.parseDouble(b);
+                    double resultado = Aritmeticos.div(x, y);
+                    return Double.toString(resultado);
+
+                } else{
+                    // Número entero
+                    Integer x = Integer.parseInt(a);
+                    Integer y = Integer.parseInt(b);
+                    Integer resultado1 = Aritmeticos.div(x, y);
+
+                    //evalúa el segundo paréntesis
+                    if(Objects.equals(datos[4], "+")){
+                        Integer z = Integer.parseInt(c);
+                        Integer w = Integer.parseInt(d);
+                        Integer resultado2 = Aritmeticos.add(z, w);
+                        //evalúa ambos paréntesis
+                        if(Objects.equals(datos[0], "+")){
+                            Integer resultadoF = Aritmeticos.add(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "-")){
+                            Integer resultadoF = Aritmeticos.sub(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "*")){
+                            Integer resultadoF = Aritmeticos.mult(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "/")){
+                            Integer resultadoF = Aritmeticos.div(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                    }
+                    if(Objects.equals(datos[4], "-")){
+                        Integer z = Integer.parseInt(c);
+                        Integer w = Integer.parseInt(d);
+                        Integer resultado2 = Aritmeticos.sub(z, w);
+                        //evalúa ambos paréntesis
+                        if(Objects.equals(datos[0], "+")){
+                            Integer resultadoF = Aritmeticos.add(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "-")){
+                            Integer resultadoF = Aritmeticos.sub(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "*")){
+                            Integer resultadoF = Aritmeticos.mult(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "/")){
+                            Integer resultadoF = Aritmeticos.div(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                    }
+                    if(Objects.equals(datos[4], "*")){
+                        Integer z = Integer.parseInt(c);
+                        Integer w = Integer.parseInt(d);
+                        Integer resultado2 = Aritmeticos.mult(z, w);
+                        //evalúa ambos paréntesis
+                        if(Objects.equals(datos[0], "+")){
+                            Integer resultadoF = Aritmeticos.add(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "-")){
+                            Integer resultadoF = Aritmeticos.sub(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "*")){
+                            Integer resultadoF = Aritmeticos.mult(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "/")){
+                            Integer resultadoF = Aritmeticos.div(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                    }
+                    if(Objects.equals(datos[4], "/")){
+                        Integer z = Integer.parseInt(c);
+                        Integer w = Integer.parseInt(d);
+                        Integer resultado2 = Aritmeticos.div(z, w);
+                       
+                        //evalúa ambos paréntesis
+                        if(Objects.equals(datos[0], "+")){
+                            Integer resultadoF = Aritmeticos.add(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "-")){
+                            Integer resultadoF = Aritmeticos.sub(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "*")){
+                            Integer resultadoF = Aritmeticos.mult(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "/")){
+                            Integer resultadoF = Aritmeticos.div(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                    }
+                }
+            }
+
+            //evalúa el primer paréntesis con multiplicación
+            if(Objects.equals(datos[1], "*")){
+                if(a.contains(".") || b.contains(".")){
+                    //*******FALTA POR CORREGIR*********/
+                    double x = Double.parseDouble(a);
+                    double y = Double.parseDouble(b);
+                    double resultado = Aritmeticos.mult(x, y);
+                    return Double.toString(resultado);
+
+                } else{
+                    // Número entero
+                    Integer x = Integer.parseInt(a);
+                    Integer y = Integer.parseInt(b);
+                    Integer resultado1 = Aritmeticos.mult(x, y);
+
+                    //evalúa el segundo paréntesis
+                    if(Objects.equals(datos[4], "+")){
+                        Integer z = Integer.parseInt(c);
+                        Integer w = Integer.parseInt(d);
+                        Integer resultado2 = Aritmeticos.add(z, w);
+                        //evalúa ambos paréntesis
+                        if(Objects.equals(datos[0], "+")){
+                            Integer resultadoF = Aritmeticos.add(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "-")){
+                            Integer resultadoF = Aritmeticos.sub(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "*")){
+                            Integer resultadoF = Aritmeticos.mult(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "/")){
+                            Integer resultadoF = Aritmeticos.div(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                    }
+                    if(Objects.equals(datos[4], "-")){
+                        Integer z = Integer.parseInt(c);
+                        Integer w = Integer.parseInt(d);
+                        Integer resultado2 = Aritmeticos.sub(z, w);
+                        //evalúa ambos paréntesis
+                        if(Objects.equals(datos[0], "+")){
+                            Integer resultadoF = Aritmeticos.add(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "-")){
+                            Integer resultadoF = Aritmeticos.sub(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "*")){
+                            Integer resultadoF = Aritmeticos.mult(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "/")){
+                            Integer resultadoF = Aritmeticos.div(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                    }
+                    if(Objects.equals(datos[4], "*")){
+                        Integer z = Integer.parseInt(c);
+                        Integer w = Integer.parseInt(d);
+                        Integer resultado2 = Aritmeticos.mult(z, w);
+                        //evalúa ambos paréntesis
+                        if(Objects.equals(datos[0], "+")){
+                            Integer resultadoF = Aritmeticos.add(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "-")){
+                            Integer resultadoF = Aritmeticos.sub(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "*")){
+                            Integer resultadoF = Aritmeticos.mult(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "/")){
+                            Integer resultadoF = Aritmeticos.div(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                    }
+                    if(Objects.equals(datos[4], "/")){
+                        Integer z = Integer.parseInt(c);
+                        Integer w = Integer.parseInt(d);
+                        Integer resultado2 = Aritmeticos.div(z, w);
+                       
+                        //evalúa ambos paréntesis
+                        if(Objects.equals(datos[0], "+")){
+                            Integer resultadoF = Aritmeticos.add(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "-")){
+                            Integer resultadoF = Aritmeticos.sub(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "*")){
+                            Integer resultadoF = Aritmeticos.mult(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                        if(Objects.equals(datos[0], "/")){
+                            Integer resultadoF = Aritmeticos.div(resultado1, resultado2);
+                            return Integer.toString(resultadoF);
+                        }
+                    }
+                }
+            }
         }
         
-
         return "Expresión inválida. Ingrese '(EXIT)' para salir.";
     }
 }
