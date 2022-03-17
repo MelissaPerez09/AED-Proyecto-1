@@ -108,7 +108,6 @@ public class Parser {
                     return Integer.toString(resultado);
                 }
             }
-
         }
 
         // Operaciones aritméticas simples (Una variable)
@@ -150,10 +149,32 @@ public class Parser {
                     return Integer.toString(resultado);
                 }
             }
+        }
 
+        //operaciones dentro de operaciones con dos paréntesis a la derecha
+        pattern = Pattern.compile("^[(]{1}[+*\\-/] [0-9]+ [(]{1}.+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex
+        matcher = pattern.matcher(linea);
+        
+        if(matcher.find()){
+            
+        }
+
+        //operaciones dentro de operaciones con dos paréntesis a la izquierda
+        pattern = Pattern.compile("^[(]{1}[+*\\-/] [(][+*\\-/] [0-9.]+ [0-9.]+[)]{1} [0-9.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  // Regex
+        matcher = pattern.matcher(linea);
+
+        if (matcher.find()){
 
         }
 
+        //operaciones dentro de operaciones con dos paréntesis
+        pattern = Pattern.compile("^[(]{1}[+*\\-/] [(]{1}[+*\\-/] + [0-9.]+ [0-9.][)]{1} [(]{1}[+*\\-/] [0-9.]+ [0-9.]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex
+        matcher = pattern.matcher(linea);
+
+        if (matcher.find()){
+
+        }
+        
 
         return "Expresión inválida. Ingrese '(EXIT)' para salir.";
     }
