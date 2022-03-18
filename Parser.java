@@ -177,7 +177,7 @@ public class Parser {
             } else{
                 String suboperacion = "(" + datos[2] + " " + datos[3] + " " + datos[4] + ")";
                 String resultado = parse(suboperacion);
-                String operacionF = "(" + datos[0] + " " + datos[1] + resultado + ")";
+                String operacionF = "(" + datos[0] + " " + datos[1] + " " + resultado + ")";
                 String resultadoF = parse(operacionF);
                 return resultadoF;
             }
