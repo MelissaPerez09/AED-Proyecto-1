@@ -154,7 +154,7 @@ public class Parser {
         }
 
         //operaciones dentro de operaciones con dos paréntesis a la derecha
-        pattern = Pattern.compile("^[(]{1}[+*\\-/] [0-9]+ [(]{1}.+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex
+        pattern = Pattern.compile("^[(]{1}[+*\\-/] [0-9.]+ [(]{1}.+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex
         matcher = pattern.matcher(linea);
         
         if(matcher.find()){
@@ -164,6 +164,11 @@ public class Parser {
             String a = datos[1];
             String b = datos[3];
             String c = datos[4];
+
+            String suboperacion = "(" + datos[2] + " " + datos[3] + " " + datos[4] + ")";
+
+            String resultado1 = parse(suboperacion);
+            System.out.println("***************************************************************************\nRESULTADO " + resultado1);
 
             //evalúa el paréntesis con la operación de suma
             if(Objects.equals(datos[2], "+")){
