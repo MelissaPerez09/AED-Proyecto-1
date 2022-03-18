@@ -165,179 +165,21 @@ public class Parser {
             String b = datos[3];
             String c = datos[4];
 
-            String suboperacion = "(" + datos[2] + " " + datos[3] + " " + datos[4] + ")";
+            //opera números decimales
+            if(a.contains(".") || b.contains(".") || c.contains(".")){
+                String suboperacion = "(" + datos[2] + " " + datos[3] + " " + datos[4] + ")";
+                String resultado = parse(suboperacion);
+                String operacionF = "(" + datos[0] + " " + datos[1] + " " + resultado + ")";
+                String resultadoF = parse(operacionF);
+                return resultadoF;
 
-            String resultado1 = parse(suboperacion);
-            System.out.println("***************************************************************************\nRESULTADO " + resultado1);
-
-            //evalúa el paréntesis con la operación de suma
-            if(Objects.equals(datos[2], "+")){
-                if(b.contains(".") || c.contains(".")){
-                    //*******FALTA POR CORREGIR*********/
-                    // Número con decimales
-                    double x = Double.parseDouble(b);
-                    double y = Double.parseDouble(c);
-                    double resultado = Aritmeticos.add(x, y);
-                    
-                    //evalúa lo que está fuera del paréntesis dependiendo de la operación
-                    if(Objects.equals(datos[0], "+")){
-                        if(a.contains(".")){
-                            double z = Double.parseDouble(a);
-                            double resultadoF = Aritmeticos.add(resultado, z);
-                            return Double.toString(resultadoF);
-                        }
-                    }
-                    if(Objects.equals(datos[0], "+")){
-                        double z = Double.parseDouble(a);
-                        double resultadoF = Aritmeticos.add(resultado, z);
-                        return Double.toString(resultadoF);
-                    }
-
-                } else{
-                    // Número entero
-                    int x = Integer.parseInt(b);
-                    int y = Integer.parseInt(c);
-                    int resultado = Aritmeticos.add(x, y);
-
-                    //evalúa lo que está fuera del paréntesis dependiendo de la operación
-                    if(Objects.equals(datos[0], "+")){
-                        Integer z = Integer.parseInt(a);
-                        Integer resultadoF = Aritmeticos.add(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                    if(Objects.equals(datos[0], "-")){
-                        Integer z = Integer.parseInt(a);
-                        Integer resultadoF = Aritmeticos.sub(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                    if(Objects.equals(datos[0], "*")){
-                        Integer z = Integer.parseInt(a);
-                        Integer resultadoF = Aritmeticos.mult(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                    if(Objects.equals(datos[0], "/")){
-                        Integer z = Integer.parseInt(a);
-                        Integer resultadoF = Aritmeticos.div(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                }
-
-            //evalúa el paréntesis con la operación de resta
-            } else if(Objects.equals(datos[2], "-")){
-                if(b.contains(".") || c.contains(".")){
-                    //*******FALTA POR CORREGIR*********/
-                    // Número con decimales
-                    double x = Double.parseDouble(b);
-                    double y = Double.parseDouble(c);
-                    double resultado = Aritmeticos.sub(x, y);
-                    return Double.toString(resultado);
-
-                } else{
-                    // Número entero
-                    int x = Integer.parseInt(b);
-                    int y = Integer.parseInt(c);
-                    int resultado = Aritmeticos.sub(x, y);
-
-                    //evalúa lo que está fuera del paréntesis dependiendo de la operación
-                    if(Objects.equals(datos[0], "+")){
-                        Integer z = Integer.parseInt(a);
-                        Integer resultadoF = Aritmeticos.add(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                    if(Objects.equals(datos[0], "-")){
-                        Integer z = Integer.parseInt(a);
-                        Integer resultadoF = Aritmeticos.sub(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                    if(Objects.equals(datos[0], "*")){
-                        Integer z = Integer.parseInt(a);
-                        Integer resultadoF = Aritmeticos.mult(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                    if(Objects.equals(datos[0], "/")){
-                        Integer z = Integer.parseInt(a);
-                        Integer resultadoF = Aritmeticos.div(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                }
-
-            //evalúa el paréntesis con la operación de división
-            } else if(Objects.equals(datos[2], "/")){
-                if(b.contains(".") || c.contains(".")){
-                    //*******FALTA POR CORREGIR*********/
-                    // Número con decimales
-                    double x = Double.parseDouble(b);
-                    double y = Double.parseDouble(c);
-                    double resultado = Aritmeticos.sub(x, y);
-                    return Double.toString(resultado);
-                    
-                } else{
-                    // Número entero
-                    int x = Integer.parseInt(b);
-                    int y = Integer.parseInt(c);
-                    int resultado = Aritmeticos.div(x, y);
-
-                    //evalúa lo que está fuera del paréntesis dependiendo de la operación
-                    if(Objects.equals(datos[0], "+")){
-                        Integer z = Integer.parseInt(a);
-                        Integer resultadoF = Aritmeticos.add(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                    if(Objects.equals(datos[0], "-")){
-                        Integer z = Integer.parseInt(a);
-                        Integer resultadoF = Aritmeticos.sub(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                    if(Objects.equals(datos[0], "*")){
-                        Integer z = Integer.parseInt(a);
-                        Integer resultadoF = Aritmeticos.mult(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                    if(Objects.equals(datos[0], "/")){
-                        Integer z = Integer.parseInt(a);
-                        Integer resultadoF = Aritmeticos.div(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                }
-
-            //evalúa el paréntesis con la operación de multiplicación  
-            } else if(Objects.equals(datos[2], "*")){
-                if(b.contains(".") || c.contains(".")){
-                    //*******FALTA POR CORREGIR*********/
-                    // Número con decimales
-                    double x = Double.parseDouble(b);
-                    double y = Double.parseDouble(c);
-                    double resultado = Aritmeticos.sub(x, y);
-                    return Double.toString(resultado);
-
-                } else{
-                    // Número entero
-                    int x = Integer.parseInt(b);
-                    int y = Integer.parseInt(c);
-                    int resultado = Aritmeticos.mult(x, y);
-
-                    //evalúa lo que está fuera del paréntesis dependiendo de la operación
-                    if(Objects.equals(datos[0], "+")){
-                        Integer z = Integer.parseInt(a);
-                        Integer resultadoF = Aritmeticos.add(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                    if(Objects.equals(datos[0], "-")){
-                        Integer z = Integer.parseInt(a);
-                        Integer resultadoF = Aritmeticos.sub(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                    if(Objects.equals(datos[0], "*")){
-                        Integer z = Integer.parseInt(a);
-                        Integer resultadoF = Aritmeticos.mult(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                    if(Objects.equals(datos[0], "/")){
-                        Integer z = Integer.parseInt(a);
-                        Integer resultadoF = Aritmeticos.div(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                }
+            //opera números enteros
+            } else{
+                String suboperacion = "(" + datos[2] + " " + datos[3] + " " + datos[4] + ")";
+                String resultado = parse(suboperacion);
+                String operacionF = "(" + datos[0] + " " + datos[1] + resultado + ")";
+                String resultadoF = parse(operacionF);
+                return resultadoF;
             }
         }
 
@@ -353,174 +195,21 @@ public class Parser {
             String b = datos[3];
             String c = datos[4];
 
-            //evalúa el paréntesis con la operación de suma
-            if(Objects.equals(datos[1], "+")){
-                if(a.contains(".") || b.contains(".")){
-                    //*******FALTA POR CORREGIR*********/
-                    // Número con decimales
-                    double x = Double.parseDouble(a);
-                    double y = Double.parseDouble(b);
-                    double resultado = Aritmeticos.add(x, y);
-                    
-                    //evalúa lo que está fuera del paréntesis dependiendo de la operación
-                    if(Objects.equals(datos[0], "+")){
-                        if(a.contains(".")){
-                            double z = Double.parseDouble(c);
-                            double resultadoF = Aritmeticos.add(resultado, z);
-                            return Double.toString(resultadoF);
-                        }
-                    }
-                    if(Objects.equals(datos[0], "+")){
-                        double z = Double.parseDouble(c);
-                        double resultadoF = Aritmeticos.add(resultado, z);
-                        return Double.toString(resultadoF);
-                    }
+            //opera números decimales
+            if(a.contains(".") || b.contains(".") || c.contains(".")){
+                String suboperacion = "(" + datos[1] + " " + datos[2] + " " + datos[3] + ")";
+                String resultado = parse(suboperacion);
+                String operacionF = "(" + datos[0] + " " + "(" + " " + resultado + ")" + " " + datos[3] + ")";
+                String resultadoF = parse(operacionF);
+                return resultadoF;
 
-                } else{
-                    // Número entero
-                    int x = Integer.parseInt(a);
-                    int y = Integer.parseInt(b);
-                    int resultado = Aritmeticos.add(x, y);
-
-                    //evalúa lo que está fuera del paréntesis dependiendo de la operación
-                    if(Objects.equals(datos[0], "+")){
-                        Integer z = Integer.parseInt(c);
-                        Integer resultadoF = Aritmeticos.add(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                    if(Objects.equals(datos[0], "-")){
-                        Integer z = Integer.parseInt(c);
-                        Integer resultadoF = Aritmeticos.sub(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                    if(Objects.equals(datos[0], "*")){
-                        Integer z = Integer.parseInt(c);
-                        Integer resultadoF = Aritmeticos.mult(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                    if(Objects.equals(datos[0], "/")){
-                        Integer z = Integer.parseInt(c);
-                        Integer resultadoF = Aritmeticos.div(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                }
-
-            //evalúa el paréntesis con la operación de resta
-            } else if(Objects.equals(datos[1], "-")){
-                if(a.contains(".") || b.contains(".")){
-                    //*******FALTA POR CORREGIR*********/
-                    // Número con decimales
-                    double x = Double.parseDouble(a);
-                    double y = Double.parseDouble(b);
-                    double resultado = Aritmeticos.sub(x, y);
-                    return Double.toString(resultado);
-
-                } else{
-                    // Número entero
-                    int x = Integer.parseInt(a);
-                    int y = Integer.parseInt(b);
-                    int resultado = Aritmeticos.sub(x, y);
-
-                    //evalúa lo que está fuera del paréntesis dependiendo de la operación
-                    if(Objects.equals(datos[0], "+")){
-                        Integer z = Integer.parseInt(c);
-                        Integer resultadoF = Aritmeticos.add(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                    if(Objects.equals(datos[0], "-")){
-                        Integer z = Integer.parseInt(c);
-                        Integer resultadoF = Aritmeticos.sub(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                    if(Objects.equals(datos[0], "*")){
-                        Integer z = Integer.parseInt(c);
-                        Integer resultadoF = Aritmeticos.mult(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                    if(Objects.equals(datos[0], "/")){
-                        Integer z = Integer.parseInt(c);
-                        Integer resultadoF = Aritmeticos.div(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                }
-
-            //evalúa el paréntesis con la operación de división
-            } else if(Objects.equals(datos[1], "/")){
-                if(a.contains(".") || b.contains(".")){
-                    //*******FALTA POR CORREGIR*********/
-                    // Número con decimales
-                    double x = Double.parseDouble(a);
-                    double y = Double.parseDouble(b);
-                    double resultado = Aritmeticos.sub(x, y);
-                    return Double.toString(resultado);
-                    
-                } else{
-                    // Número entero
-                    int x = Integer.parseInt(a);
-                    int y = Integer.parseInt(b);
-                    int resultado = Aritmeticos.div(x, y);
-
-                    //evalúa lo que está fuera del paréntesis dependiendo de la operación
-                    if(Objects.equals(datos[0], "+")){
-                        Integer z = Integer.parseInt(c);
-                        Integer resultadoF = Aritmeticos.add(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                    if(Objects.equals(datos[0], "-")){
-                        Integer z = Integer.parseInt(c);
-                        Integer resultadoF = Aritmeticos.sub(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                    if(Objects.equals(datos[0], "*")){
-                        Integer z = Integer.parseInt(c);
-                        Integer resultadoF = Aritmeticos.mult(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                    if(Objects.equals(datos[0], "/")){
-                        Integer z = Integer.parseInt(c);
-                        Integer resultadoF = Aritmeticos.div(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                }
-
-            //evalúa el paréntesis con la operación de multiplicación  
-            } else if(Objects.equals(datos[1], "*")){
-                if(a.contains(".") || b.contains(".")){
-                    //*******FALTA POR CORREGIR*********/
-                    // Número con decimales
-                    double x = Double.parseDouble(a);
-                    double y = Double.parseDouble(b);
-                    double resultado = Aritmeticos.sub(x, y);
-                    return Double.toString(resultado);
-
-                } else{
-                    // Número entero
-                    int x = Integer.parseInt(a);
-                    int y = Integer.parseInt(b);
-                    int resultado = Aritmeticos.mult(x, y);
-
-                    //evalúa lo que está fuera del paréntesis dependiendo de la operación
-                    if(Objects.equals(datos[0], "+")){
-                        Integer z = Integer.parseInt(c);
-                        Integer resultadoF = Aritmeticos.add(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                    if(Objects.equals(datos[0], "-")){
-                        Integer z = Integer.parseInt(c);
-                        Integer resultadoF = Aritmeticos.sub(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                    if(Objects.equals(datos[0], "*")){
-                        Integer z = Integer.parseInt(c);
-                        Integer resultadoF = Aritmeticos.mult(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                    if(Objects.equals(datos[0], "/")){
-                        Integer z = Integer.parseInt(c);
-                        Integer resultadoF = Aritmeticos.div(resultado, z);
-                        return Integer.toString(resultadoF);
-                    }
-                }
+            //opera números enteros
+            } else{
+                String suboperacion = "(" + datos[1] + " " + datos[2] + " " + datos[3] + ")";
+                String resultado = parse(suboperacion);
+                String operacionF = "(" + datos[0] + " " + "(" + " " + resultado + ")" + " " + datos[3] + ")";
+                String resultadoF = parse(operacionF);
+                return resultadoF;
             }
         }
 
