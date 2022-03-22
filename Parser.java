@@ -300,7 +300,7 @@ public class Parser {
 
         }
         //operaciones dentro de operaciones con dos paréntesis a la izquierda
-        pattern = Pattern.compile("^[(]{1}[\\-+\\*/]  [(][\\-+\\*/]  [0-9.]+ [0-9.]+[)]{1} [0-9.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  //Regex
+        pattern = Pattern.compile("^[(]{1}[\\-+\\*/] [(][\\-+\\*/] [0-9.]+ [0-9.]+[)]{1} [0-9.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  //Regex
         matcher = pattern.matcher(linea);
         if (matcher.find()){
             linea = linea.replace("(", "");
