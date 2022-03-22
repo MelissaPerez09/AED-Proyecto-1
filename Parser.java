@@ -367,7 +367,33 @@ public class Parser {
                 return resultadoF;
             }
         }
-        
+
+        // **************************************************************************************************** //
+        // **************************************** Variables ************************************************* //
+        // **************************************************************************************************** //
+
+        // Operaciones aritméticas simples. Variable a la izquierda
+        pattern = Pattern.compile("^[(]{1}[+*-/]{1} [A-z.]+ [0-9.]+[)]{1}", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
+        matcher = pattern.matcher(linea);
+
+        if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+
+            String operacion = datos[0];
+            String variable = datos[1];
+            String operando = datos[2];
+
+            if(variables.containsKey(variable)){
+                String valorVariable = variables.get(variable);
+                String newOp = "(" + operacion + " " + valorVariable + " " + operando + ")";
+                return parse(newOp);
+            }else{
+                return (variable + " no está definida.");
+            }
+        }
+
         return "Expresión inválida. Ingrese '(EXIT)' para salir.";
     }
 
