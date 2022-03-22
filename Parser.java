@@ -12,8 +12,6 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.naming.spi.DirStateFactory.Result;
-
 public class Parser {
     private HashMap<String, String> variables = new HashMap<String, String>();  // Almacenamiento de las variables personales
 
@@ -110,6 +108,7 @@ public class Parser {
                     return Integer.toString(resultado);
                 }
             }
+            
         }
 
         // Operaciones aritméticas simples (Una variable)
