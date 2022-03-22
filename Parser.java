@@ -1,10 +1,10 @@
 /**
  * Esta es la clase que evalúa una operación del lenguaje LISP
  * Universidad del Valle de Guatemala
- * @author: Mark Albrand
- * @author: Jimena Hernández
- * @author: Emily Pérez
- * @version: 2-mar-22
+ * @author Mark Albrand
+ * @author Jimena Hernández
+ * @author Emily Pérez
+ * @version 2-mar-22
  */
 
 import java.util.HashMap;

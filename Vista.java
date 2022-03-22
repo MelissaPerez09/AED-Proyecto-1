@@ -1,10 +1,10 @@
 /**
  * Esta es la clase que permite ingresar y mostrar datos.
  * Universidad del Valle de Guatemala
- * @author: Mark Albrand
- * @author: Jimena Hernández
- * @author: Emily Pérez
- * @version: 2-mar-22
+ * @author Mark Albrand
+ * @author Jimena Hernández
+ * @author Emily Pérez
+ * @version 2-mar-22
  */
 
 import java.util.Scanner;
