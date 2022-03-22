@@ -111,6 +111,7 @@ public class Parser {
             
         }
 
+
         // Operaciones aritméticas simples (Una variable)
         pattern = Pattern.compile("^[(]{1}[+\\-]{2} [0-9]+[)]{1}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);
@@ -151,38 +152,6 @@ public class Parser {
                 }
             }
         }
-
-
-        //operaciones dentro de operaciones con dos paréntesis a la derecha
-        pattern = Pattern.compile("^[(]{1}[\\-+\\*/] [0-9.]+ [(]{1}.+[)]{2}$", Pattern.CASE_INSENSITIVE);  //Regex
-        matcher = pattern.matcher(linea);
-        
-        if(matcher.find()){
-            linea = linea.replace("(", "");
-            linea = linea.replace(")", "");
-            String[] datos = linea.split(" ");
-            String a = datos[1];
-            String b = datos[3];
-            String c = datos[4];
-
-            //opera números decimales
-            if(a.contains(".") || b.contains(".") || c.contains(".")){
-                String suboperacion = "(" + datos[2] + " " + datos[3] + " " + datos[4] + ")";
-                String resultado = parse(suboperacion);
-                String operacionF = "(" + datos[0] + " " + datos[1] + " " + resultado + ")";
-                String resultadoF = parse(operacionF);
-                return resultadoF;
-
-            //opera números enteros
-            } else{
-                String suboperacion = "(" + datos[2] + " " + datos[3] + " " + datos[4] + ")";
-                String resultado = parse(suboperacion);
-                String operacionF = "(" + datos[0] + " " + datos[1] + " " + resultado + ")";
-                String resultadoF = parse(operacionF);
-                return resultadoF;
-            }
-        }
-
         
 
         // Operaciones lógicas simples. Mayor o menor
@@ -254,6 +223,7 @@ public class Parser {
             }
         }
 
+
         // Operaciones lógicas simples. Igual a
         pattern = Pattern.compile("^[(]{1}[=]{2} [0-9.]+ [0-9.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación lógica simple
         matcher = pattern.matcher(linea);
@@ -281,6 +251,7 @@ public class Parser {
             }
         }
 
+
         // Definición de variables
         pattern = Pattern.compile("[(]{1}let [A-z]+ [0-9.]+|[\"]+[A-z]+[\"]+[)]{1}$", Pattern.CASE_INSENSITIVE);  // Regex para una definición de variable
         matcher = pattern.matcher(linea);
@@ -299,6 +270,39 @@ public class Parser {
             return ("Se ha asignado correctamente " + nombre + " con el valor " + valor);
 
         }
+
+
+        //operaciones dentro de operaciones con dos paréntesis a la derecha
+        pattern = Pattern.compile("^[(]{1}[\\-+\\*/] [0-9.]+ [(]{1}.+[)]{2}$", Pattern.CASE_INSENSITIVE);  //Regex
+        matcher = pattern.matcher(linea);
+
+        if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+            String a = datos[1];
+            String b = datos[3];
+            String c = datos[4];
+
+            //opera números decimales
+            if(a.contains(".") || b.contains(".") || c.contains(".")){
+                String suboperacion = "(" + datos[2] + " " + datos[3] + " " + datos[4] + ")";
+                String resultado = parse(suboperacion);
+                String operacionF = "(" + datos[0] + " " + datos[1] + " " + resultado + ")";
+                String resultadoF = parse(operacionF);
+                return resultadoF;
+
+                //opera números enteros
+            } else{
+                String suboperacion = "(" + datos[2] + " " + datos[3] + " " + datos[4] + ")";
+                String resultado = parse(suboperacion);
+                String operacionF = "(" + datos[0] + " " + datos[1] + " " + resultado + ")";
+                String resultadoF = parse(operacionF);
+                return resultadoF;
+            }
+        }
+
+
         //operaciones dentro de operaciones con dos paréntesis a la izquierda
         pattern = Pattern.compile("^[(]{1}[\\-+\\*/] [(][\\-+\\*/] [0-9.]+ [0-9.]+[)]{1} [0-9.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  //Regex
         matcher = pattern.matcher(linea);
@@ -327,6 +331,7 @@ public class Parser {
                 return resultadoF;
             }
         }
+
 
         //operaciones dentro de operaciones con dos paréntesis
         pattern = Pattern.compile("^[(]{1}[+*-\\/] [(]{1}[+*-\\/]+ [0-9.]+ [0-9.][)]{1} [(]{1}[+*-\\/] [0-9.]+ [0-9.]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex
