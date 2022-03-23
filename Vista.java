@@ -12,7 +12,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Vista {
-    private Scanner scan = new Scanner(System.in);
+    private static Scanner scan = new Scanner(System.in);
 
     /**
      * Método para imprimir un mensaje
@@ -61,14 +61,15 @@ public class Vista {
     * Despliega el menú de opciones para el usuario. Luego, recibe la opción elegida por el usuario y la devuelve.
     * @return La opción elegida por el usuario
     */
-    public ArrayList<String> getLinea(){
+    public static ArrayList<String> getLinea(){
         ArrayList<String> funcion = new ArrayList<String>();
 		String linea;
-        mensaje("\n" +"···");
+        System.out.println("\n" +"···");
                 
         linea = scan.nextLine();
         while(linea != ("END")){
-                funcion.add(linea);
+            System.out.println("\n" +"···");
+            funcion.add(linea);
         } 
 		return funcion;
     }

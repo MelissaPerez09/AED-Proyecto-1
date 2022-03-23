@@ -7,6 +7,7 @@
  * @version 2-mar-22
  */
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -14,7 +15,7 @@ import java.util.regex.Pattern;
 
 public class Parser {
     private HashMap<String, String> variables = new HashMap<String, String>();  // Almacenamiento de las variables personales
-
+    private ArrayList<Funciones> funciones = new ArrayList<Funciones>();
     /**
      * Método principal para evaluar una línea a código LISP
      * @param linea Línea ingresada por el usuario
@@ -1188,13 +1189,31 @@ public class Parser {
         // **************************************** Función ************************************************* //
         // **************************************************************************************************** //
 
-         // Operaciones lógicas simples. == con 2 variables
+         // Definicion de funciones
         pattern = Pattern.compile("^[(]{1}DEFUN{1} [A-z.]+[(][A-z.]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);
         if(matcher.find()){
-            Funciones  
+            ArrayList<String> nuevalinea = Vista.getLinea();
+            Funciones funcion = new Funciones(linea, nuevalinea);
         }
 
+        //Uso de funciones personalizadas
+        pattern = Pattern.compile("^[(]{1}[A-z.]+ [(][0-9.]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
+        matcher = pattern.matcher(linea);
+        if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+
+            String funcion = datos[0];
+            String variable = datos[1];
+
+            for (int i = 0; i < funciones.size(); i++) {
+                if (funciones.get(i).getNombre().equals(funcion)){
+                    return funciones.get(i).eval(variable);
+                }
+            }
+        }
 
 
         return "Expresión inválida. Ingrese '(EXIT)' para salir.";
