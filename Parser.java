@@ -735,7 +735,7 @@ public class Parser {
             String operando2 = datos[4];
 
             //opera números decimales
-            if (variables.containsKey(variable1) && variables.containsKey(variable2)) {
+            if (variables.containsKey(variable1) && variables.containsKey(variable2) && variables.containsKey(variable3)) {
                 String valorVariable1 = variables.get(variable1);
                 String valorVariable2 = variables.get(variable2);
                 String valorVariable3 = variables.get(variable3);
@@ -750,8 +750,16 @@ public class Parser {
                 return (variable1 + " no está definida.");
             }else if(!variables.containsKey(variable2)){
                 return (variable2 + " no está definida.");
-            }else if (!variables.containsKey(variable1) && !variables.containsKey(variable2)){
+            }else if(!variables.containsKey(variable3)){
+                return (variable3 + " no está definida");
+            }else if (!variables.containsKey(variable1) && !variables.containsKey(variable2) && !variables.containsKey(variable3)){
+                return (variable1 + " no está definida. " + variable2 + " no está definida. " + variable3 + " no está definida.");
+            }else if(!variables.containsKey(variable1) && !variables.containsKey(variable2)){
                 return (variable1 + " no está definida. " + variable2 + " no está definida.");
+            }else if(!variables.containsKey(variable1) && !variables.containsKey(variable3)){
+                return (variable1 + " no está definida. " + variable3 + " no está definida.");
+            }else if(!variables.containsKey(variable2) && !variables.containsKey(variable3)){
+                return (variable2 + " no está definida. " + variable3 + " no está definida.");
             }
         }
         // Variable en posición 1-2-4
@@ -770,7 +778,7 @@ public class Parser {
             String operando2 = datos[4];
 
             //opera números decimales
-            if (variables.containsKey(variable1) && variables.containsKey(variable2)) {
+            if (variables.containsKey(variable1) && variables.containsKey(variable2) && variables.containsKey(variable3)) {
                 String valorVariable1 = variables.get(variable1);
                 String valorVariable2 = variables.get(variable2);
                 String valorVariable3 = variables.get(variable3);
@@ -785,8 +793,16 @@ public class Parser {
                 return (variable1 + " no está definida.");
             }else if(!variables.containsKey(variable2)){
                 return (variable2 + " no está definida.");
-            }else if (!variables.containsKey(variable1) && !variables.containsKey(variable2)){
+            }else if(!variables.containsKey(variable3)){
+                return (variable3 + " no está definida");
+            }else if (!variables.containsKey(variable1) && !variables.containsKey(variable2) && !variables.containsKey(variable3)){
+                return (variable1 + " no está definida. " + variable2 + " no está definida. " + variable3 + " no está definida.");
+            }else if(!variables.containsKey(variable1) && !variables.containsKey(variable2)){
                 return (variable1 + " no está definida. " + variable2 + " no está definida.");
+            }else if(!variables.containsKey(variable1) && !variables.containsKey(variable3)){
+                return (variable1 + " no está definida. " + variable3 + " no está definida.");
+            }else if(!variables.containsKey(variable2) && !variables.containsKey(variable3)){
+                return (variable2 + " no está definida. " + variable3 + " no está definida.");
             }
         }
         // Variable en posición 1-3-4
@@ -805,7 +821,7 @@ public class Parser {
             String operando2 = datos[4];
 
             //opera números decimales
-            if (variables.containsKey(variable1) && variables.containsKey(variable2)) {
+            if (variables.containsKey(variable1) && variables.containsKey(variable2) && variables.containsKey(variable3)) {
                 String valorVariable1 = variables.get(variable1);
                 String valorVariable2 = variables.get(variable2);
                 String valorVariable3 = variables.get(variable3);
@@ -820,12 +836,65 @@ public class Parser {
                 return (variable1 + " no está definida.");
             }else if(!variables.containsKey(variable2)){
                 return (variable2 + " no está definida.");
-            }else if (!variables.containsKey(variable1) && !variables.containsKey(variable2)){
+            }else if(!variables.containsKey(variable3)){
+                return (variable3 + " no está definida");
+            }else if (!variables.containsKey(variable1) && !variables.containsKey(variable2) && !variables.containsKey(variable3)){
+                return (variable1 + " no está definida. " + variable2 + " no está definida. " + variable3 + " no está definida.");
+            }else if(!variables.containsKey(variable1) && !variables.containsKey(variable2)){
                 return (variable1 + " no está definida. " + variable2 + " no está definida.");
+            }else if(!variables.containsKey(variable1) && !variables.containsKey(variable3)){
+                return (variable1 + " no está definida. " + variable3 + " no está definida.");
+            }else if(!variables.containsKey(variable2) && !variables.containsKey(variable3)){
+                return (variable2 + " no está definida. " + variable3 + " no está definida.");
             }
         }
         // Variable en posición 2-3-4
         pattern = Pattern.compile("^[(]{1}[+*-\\/] [(]{1}[+*-\\/]+ [0-9.]+ [A-z]+[)]{1} [(]{1}[+*-\\/] [A-z]+ [A-z]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
+        matcher = pattern.matcher(linea);
+
+        if(matcher.find()) {
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+            String variable1 = datos[3];
+            String variable2 = datos[5];
+            String variable3 = datos[6];
+            String a = datos[2];
+            String operando1 = datos[1];
+            String operando2 = datos[4];
+
+            //opera números decimales
+            if (variables.containsKey(variable1) && variables.containsKey(variable2) && variables.containsKey(variable3)) {
+                String valorVariable1 = variables.get(variable1);
+                String valorVariable2 = variables.get(variable2);
+                String valorVariable3 = variables.get(variable3);
+
+                String suboperacion1 = "(" + operando1 + " " + a + " " + valorVariable1 + ")";
+                String resultado1 = parse(suboperacion1);
+                String suboperacion2 = "(" + operando2 + " " + valorVariable2 + " " + valorVariable3 + ")";
+                String resultado2 = parse(suboperacion2);
+                String operacionF = "(" + datos[0] + " " + resultado1 + " " + resultado2 + ")";
+                return parse(operacionF);
+            }else if(!variables.containsKey(variable1)){
+                return (variable1 + " no está definida.");
+            }else if(!variables.containsKey(variable2)){
+                return (variable2 + " no está definida.");
+            }else if(!variables.containsKey(variable3)){
+                return (variable3 + " no está definida");
+            }else if (!variables.containsKey(variable1) && !variables.containsKey(variable2) && !variables.containsKey(variable3)){
+                return (variable1 + " no está definida. " + variable2 + " no está definida. " + variable3 + " no está definida.");
+            }else if(!variables.containsKey(variable1) && !variables.containsKey(variable2)){
+                return (variable1 + " no está definida. " + variable2 + " no está definida.");
+            }else if(!variables.containsKey(variable1) && !variables.containsKey(variable3)){
+                return (variable1 + " no está definida. " + variable3 + " no está definida.");
+            }else if(!variables.containsKey(variable2) && !variables.containsKey(variable3)){
+                return (variable2 + " no está definida. " + variable3 + " no está definida.");
+            }
+        }
+
+        // 4 variables
+        // Variable en posición 2-3-4
+        pattern = Pattern.compile("^[(]{1}[+*-\\/] [(]{1}[+*-\\/]+ [A-z]+ [A-z]+[)]{1} [(]{1}[+*-\\/] [A-z]+ [A-z]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);
 
         if(matcher.find()) {
