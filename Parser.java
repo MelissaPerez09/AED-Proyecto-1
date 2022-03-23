@@ -394,6 +394,32 @@ public class Parser {
             }
         }
 
+        //operaciones dentro de operaciones. Dos paréntesis a la derecha. Variable a la izquierda.
+        pattern = Pattern.compile("^[(]{1}[+*-/]{1} [A-z.]+ [(]{1}[+*-/]+ [0-9.]+ [0-9.][)]{2}$", Pattern.CASE_INSENSITIVE);  //Regex
+        matcher = pattern.matcher(linea);
+
+        if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+
+            String operacion = datos[0];
+            String variable = datos[1];
+            String operador = datos[2];
+            String num1 = datos[3];
+            String num2 = datos[4];
+
+            if(variables.containsKey(variable)){
+                String valorVariable = variables.get(variable);
+                String suboperacion = "(" + operador + " " + num1 + " " + num2 + ")"; //evalúa el paréntesis
+                String resultado = parse(suboperacion); //guarda el resultado del paréntesis
+                String operacionF = "(" + operacion + " " + valorVariable + " " + resultado + ")"; //opera el resultado del paréntesis con el valor de la variable
+                return parse(operacionF);
+            }else{
+                return (variable + " no está definida.");
+            }
+        }
+
         return "Expresión inválida. Ingrese '(EXIT)' para salir.";
     }
 
