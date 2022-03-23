@@ -23,4 +23,8 @@ public class Funciones {
         return nombre;
     }
 
+    public String eval(String param){
+        return "";
+    }
+
 }
