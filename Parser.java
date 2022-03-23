@@ -542,6 +542,8 @@ public class Parser {
                 return (variable1 + " no está definida.");
             }else if(!variables.containsKey(variable2)){
                 return (variable2 + " no está definida.");
+            }else if (!variables.containsKey(variable1) && !variables.containsKey(variable2)){
+                return (variable1 + " no está definida. " + variable2 + " no está definida.");
             }
         }
 
@@ -575,6 +577,8 @@ public class Parser {
                 return (variable1 + " no está definida.");
             }else if(!variables.containsKey(variable2)){
                 return (variable2 + " no está definida.");
+            }else if (!variables.containsKey(variable1) && !variables.containsKey(variable2)){
+                return (variable1 + " no está definida. " + variable2 + " no está definida.");
             }
         }
         // Variable en posición 1 y 4
@@ -607,6 +611,8 @@ public class Parser {
                 return (variable1 + " no está definida.");
             }else if(!variables.containsKey(variable2)){
                 return (variable2 + " no está definida.");
+            }else if (!variables.containsKey(variable1) && !variables.containsKey(variable2)){
+                return (variable1 + " no está definida. " + variable2 + " no está definida.");
             }
         }
         // Variable en posición 2 y 4
@@ -639,6 +645,8 @@ public class Parser {
                 return (variable1 + " no está definida.");
             }else if(!variables.containsKey(variable2)){
                 return (variable2 + " no está definida.");
+            }else if (!variables.containsKey(variable1) && !variables.containsKey(variable2)){
+                return (variable1 + " no está definida. " + variable2 + " no está definida.");
             }
         }
         // Variable en posición 3 y 4
@@ -671,6 +679,8 @@ public class Parser {
                 return (variable1 + " no está definida.");
             }else if(!variables.containsKey(variable2)){
                 return (variable2 + " no está definida.");
+            }else if (!variables.containsKey(variable1) && !variables.containsKey(variable2)){
+                return (variable1 + " no está definida. " + variable2 + " no está definida.");
             }
         }
         // Variable en posición 2 y 3
@@ -703,6 +713,8 @@ public class Parser {
                 return (variable1 + " no está definida.");
             }else if(!variables.containsKey(variable2)){
                 return (variable2 + " no está definida.");
+            }else if (!variables.containsKey(variable1) && !variables.containsKey(variable2)){
+                return (variable1 + " no está definida. " + variable2 + " no está definida.");
             }
         }
 
