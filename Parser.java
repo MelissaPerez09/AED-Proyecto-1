@@ -901,22 +901,22 @@ public class Parser {
             linea = linea.replace("(", "");
             linea = linea.replace(")", "");
             String[] datos = linea.split(" ");
-            String variable1 = datos[3];
-            String variable2 = datos[5];
-            String variable3 = datos[6];
-            String a = datos[2];
+            String variable1 = datos[2];
+            String variable2 = datos[3];
+            String variable3 = datos[5];
+            String variable4 = datos[6];
             String operando1 = datos[1];
             String operando2 = datos[4];
 
-            //opera números decimales
-            if (variables.containsKey(variable1) && variables.containsKey(variable2)) {
+            if (variables.containsKey(variable1) && variables.containsKey(variable2) && variables.containsKey(variable3) && variables.containsKey(variable4)) {
                 String valorVariable1 = variables.get(variable1);
                 String valorVariable2 = variables.get(variable2);
                 String valorVariable3 = variables.get(variable3);
+                String valorVariable4 = variables.get(variable4);
 
-                String suboperacion1 = "(" + operando1 + " " + a + " " + valorVariable1 + ")";
+                String suboperacion1 = "(" + operando1 + " " + valorVariable1 + " " + valorVariable2 + ")";
                 String resultado1 = parse(suboperacion1);
-                String suboperacion2 = "(" + operando2 + " " + valorVariable2 + " " + valorVariable3 + ")";
+                String suboperacion2 = "(" + operando2 + " " + valorVariable3 + " " + valorVariable4 + ")";
                 String resultado2 = parse(suboperacion2);
                 String operacionF = "(" + datos[0] + " " + resultado1 + " " + resultado2 + ")";
                 return parse(operacionF);
@@ -924,8 +924,18 @@ public class Parser {
                 return (variable1 + " no está definida.");
             }else if(!variables.containsKey(variable2)){
                 return (variable2 + " no está definida.");
-            }else if (!variables.containsKey(variable1) && !variables.containsKey(variable2)){
+            }else if(!variables.containsKey(variable3)){
+                return (variable3 + " no está definida");
+            }else if (!variables.containsKey(variable1) && !variables.containsKey(variable2) && !variables.containsKey(variable3)){
+                return (variable1 + " no está definida. " + variable2 + " no está definida. " + variable3 + " no está definida.");
+            }else if(!variables.containsKey(variable1) && !variables.containsKey(variable2)){
                 return (variable1 + " no está definida. " + variable2 + " no está definida.");
+            }else if(!variables.containsKey(variable1) && !variables.containsKey(variable3)){
+                return (variable1 + " no está definida. " + variable3 + " no está definida.");
+            }else if(!variables.containsKey(variable2) && !variables.containsKey(variable3)){
+                return (variable2 + " no está definida. " + variable3 + " no está definida.");
+            }else if(!variables.containsKey(variable2) && !variables.containsKey(variable3) && !variables.containsKey(variable3) && !variables.containsKey(variable4)){
+                return (variable1 + " no está definida. " + variable2 + " no está definida. " + variable3 + " no está definida. " + variable4 + " no está definida.");
             }
         }
 
