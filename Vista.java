@@ -67,7 +67,7 @@ public class Vista {
         System.out.println("\n" +"···");
                 
         linea = scan.nextLine();
-        while(!linea.equals(("END"))){
+        while(!linea.equals(("(END)"))){
             funcion.add(linea);
             System.out.println("\n" +"···");
             linea = scan.nextLine();
