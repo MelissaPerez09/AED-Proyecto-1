@@ -1184,9 +1184,20 @@ public class Parser {
             }
         }
 
+         // **************************************************************************************************** //
+        // **************************************** Función ************************************************* //
+        // **************************************************************************************************** //
+
+         // Operaciones lógicas simples. == con 2 variables
+        pattern = Pattern.compile("^[(]{1}DEFUN{1} [A-z.]+[(][A-z.]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
+        matcher = pattern.matcher(linea);
+        if(matcher.find()){
+            Funciones  
+        }
+
+
 
         return "Expresión inválida. Ingrese '(EXIT)' para salir.";
     }
-
 
 }

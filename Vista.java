@@ -7,6 +7,8 @@
  * @version 2-mar-22
  */
 
+import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Vista {
@@ -53,6 +55,22 @@ public class Vista {
     public void ayuda(){
         mensaje("\n >>>Help: ");
         mensaje("\n Para definir una operacion debe ingresarlas en formato lisp. Ejemplo: (+ 2 3)\n Para definir una variable debe ingresarla de la siguiente forma: (let nombredelavaribale valordelavariable)");
+    }
+
+    /**
+    * Despliega el menú de opciones para el usuario. Luego, recibe la opción elegida por el usuario y la devuelve.
+    * @return La opción elegida por el usuario
+    */
+    public ArrayList<String> getLinea(){
+        ArrayList<String> funcion = new ArrayList<String>();
+		String linea;
+        mensaje("\n" +"···");
+                
+        linea = scan.nextLine();
+        while(linea != ("END")){
+                funcion.add(linea);
+        } 
+		return funcion;
     }
 
 }
