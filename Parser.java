@@ -394,7 +394,7 @@ public class Parser {
             }
         }
 
-        //operaciones dentro de operaciones. Dos paréntesis a la derecha. Variable a la izquierda.
+        //operaciones dentro de operaciones. Dos paréntesis a la derecha. Variable en posición 1.
         pattern = Pattern.compile("^[(]{1}[+*-/]{1} [A-z.]+ [(]{1}[+*-/]+ [0-9.]+ [0-9.][)]{2}$", Pattern.CASE_INSENSITIVE);  //Regex
         matcher = pattern.matcher(linea);
 
@@ -417,6 +417,386 @@ public class Parser {
                 return parse(operacionF);
             }else{
                 return (variable + " no está definida.");
+            }
+        }
+
+        //operaciones dentro de operaciones. Dos paréntesis a la derecha. Variable en posición 3.
+        pattern = Pattern.compile("^[(]{1}[+*-/]{1} [0-9.]+ [(]{1}[+*-/]+ [A-z.]+ [0-9.][)]{2}$", Pattern.CASE_INSENSITIVE);  //Regex
+        matcher = pattern.matcher(linea);
+
+        if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+
+            String operacion = datos[0];
+            String num1 = datos[1];
+            String operador = datos[2];
+            String variable = datos[3];
+            String num2 = datos[4];
+
+            if(variables.containsKey(variable)){
+                String valorVariable = variables.get(variable);
+                String suboperacion = "(" + operador + " " + valorVariable + " " + num2 + ")"; //evalúa el paréntesis
+                String resultado = parse(suboperacion); //guarda el resultado del paréntesis
+                String operacionF = "(" + operacion + " " + num1 + " " + resultado + ")"; //opera el resultado del paréntesis con el valor de la variable
+                return parse(operacionF);
+            }else{
+                return (variable + " no está definida.");
+            }
+        }
+
+        //operaciones dentro de operaciones. Dos paréntesis a la derecha. Variable en posición 4.
+        pattern = Pattern.compile("^[(]{1}[+*-/]{1} [0-9.]+ [(]{1}[+*-/]+ [0-9.]+ [A-z.][)]{2}$", Pattern.CASE_INSENSITIVE);  //Regex
+        matcher = pattern.matcher(linea);
+
+        if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+
+            String operacion = datos[0];
+            String num1 = datos[1];
+            String operador = datos[2];
+            String num2 = datos[3];
+            String variable = datos[4];
+
+            if(variables.containsKey(variable)){
+                String valorVariable = variables.get(variable);
+                String suboperacion = "(" + operador + " " + num2 + " " + valorVariable + ")"; //evalúa el paréntesis
+                String resultado = parse(suboperacion); //guarda el resultado del paréntesis
+                String operacionF = "(" + operacion + " " + num1 + " " + resultado + ")"; //opera el resultado del paréntesis con el valor de la variable
+                return parse(operacionF);
+            }else{
+                return (variable + " no está definida.");
+            }
+        }
+
+        //operaciones dentro de operaciones. Dos paréntesis a la derecha. Dos variables [1], [3]
+        pattern = Pattern.compile("^[(]{1}[+*-/]{1} [A-z.]+ [(]{1}[+*-/]+ [A-z.]+ [0-9.][)]{2}$", Pattern.CASE_INSENSITIVE);  //Regex
+        matcher = pattern.matcher(linea);
+
+        if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+
+            String operacion = datos[0];
+            String variable1 = datos[1];
+            String operador = datos[2];
+            String variable2 = datos[3];
+            String num1 = datos[4];
+
+            if (variables.containsKey(variable1) && variables.containsKey(variable2)){
+                String valorVariable1 = variables.get(variable1);
+                String valorVariable2 = variables.get(variable2);
+                String suboperacion = "(" + operador + " " + valorVariable2 + " " + num1 + ")"; //evalúa el paréntesis
+                String resultado = parse(suboperacion); //guarda el resultado del paréntesis
+                String operacionF = "(" + operacion + " " + valorVariable1 + " " + resultado + ")"; //opera el resultado del paréntesis con el valor de la variable
+                return parse(operacionF);
+            }else if(!variables.containsKey(variable1)){
+                return (variable1 + " no está definida.");
+            }else if(!variables.containsKey(variable2)){
+                return (variable2 + " no está definida.");
+            }else if (!variables.containsKey(variable1) && !variables.containsKey(variable2)){
+                return (variable1 + " no está definida. " + variable2 + " no está definida.");
+            }
+        }
+
+        //operaciones dentro de operaciones. Dos paréntesis a la derecha. Dos variables [3], [4]
+        pattern = Pattern.compile("^[(]{1}[+*-/]{1} [0-9.]+ [(]{1}[+*-/]+ [A-z.]+ [A-z.][)]{2}$", Pattern.CASE_INSENSITIVE);  //Regex
+        matcher = pattern.matcher(linea);
+
+        if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+
+            String operacion = datos[0];
+            String num1 = datos[1];
+            String operador = datos[2];
+            String variable1 = datos[3];
+            String variable2 = datos[4];
+
+            if (variables.containsKey(variable1) && variables.containsKey(variable2)){
+                String valorVariable1 = variables.get(variable1);
+                String valorVariable2 = variables.get(variable2);
+                String suboperacion = "(" + operador + " " + valorVariable1 + " " + valorVariable2 + ")"; //evalúa el paréntesis
+                String resultado = parse(suboperacion); //guarda el resultado del paréntesis
+                String operacionF = "(" + operacion + " " + num1 + " " + resultado + ")"; //opera el resultado del paréntesis con el valor de la variable
+                return parse(operacionF);
+            }else if(!variables.containsKey(variable1)){
+                return (variable1 + " no está definida.");
+            }else if(!variables.containsKey(variable2)){
+                return (variable2 + " no está definida.");
+            }else if (!variables.containsKey(variable1) && !variables.containsKey(variable2)){
+                return (variable1 + " no está definida. " + variable2 + " no está definida.");
+            }
+        }
+
+        //operaciones dentro de operaciones. Dos paréntesis a la derecha. Dos variables [1], [4]
+        pattern = Pattern.compile("^[(]{1}[+*-/]{1} [A-z.]+ [(]{1}[+*-/]+ [0-9.]+ [A-z.][)]{2}$", Pattern.CASE_INSENSITIVE);  //Regex
+        matcher = pattern.matcher(linea);
+
+        if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+
+            String operacion = datos[0];
+            String variable1 = datos[1];
+            String operador = datos[2];
+            String num1 = datos[3];
+            String variable2 = datos[4];
+
+            if (variables.containsKey(variable1) && variables.containsKey(variable2)){
+                String valorVariable1 = variables.get(variable1);
+                String valorVariable2 = variables.get(variable2);
+                String suboperacion = "(" + operador + " " + num1 + " " + valorVariable2 + ")"; //evalúa el paréntesis
+                String resultado = parse(suboperacion); //guarda el resultado del paréntesis
+                String operacionF = "(" + operacion + " " + valorVariable1 + " " + resultado + ")"; //opera el resultado del paréntesis con el valor de la variable
+                return parse(operacionF);
+            }else if(!variables.containsKey(variable1)){
+                return (variable1 + " no está definida.");
+            }else if(!variables.containsKey(variable2)){
+                return (variable2 + " no está definida.");
+            }else if (!variables.containsKey(variable1) && !variables.containsKey(variable2)){
+                return (variable1 + " no está definida. " + variable2 + " no está definida.");
+            }
+        }
+
+        //operaciones dentro de operaciones. Dos paréntesis a la derecha. Tres variables [1], [3], [4]
+        pattern = Pattern.compile("^[(]{1}[+*-/]{1} [A-z.]+ [(]{1}[+*-/]+ [A-z.]+ [A-z.][)]{2}$", Pattern.CASE_INSENSITIVE);  //Regex
+        matcher = pattern.matcher(linea);
+
+        if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+
+            String operacion = datos[0];
+            String variable1 = datos[1];
+            String operador = datos[2];
+            String variable2 = datos[3];
+            String variable3 = datos[4];
+
+            if (variables.containsKey(variable1) && variables.containsKey(variable2)){
+                String valorVariable1 = variables.get(variable1);
+                String valorVariable2 = variables.get(variable2);
+                String valorVariable3 = variables.get(variable3);
+                String suboperacion = "(" + operador + " " + valorVariable2 + " " + valorVariable3 + ")"; //evalúa el paréntesis
+                String resultado = parse(suboperacion); //guarda el resultado del paréntesis
+                String operacionF = "(" + operacion + " " + valorVariable1 + " " + resultado + ")"; //opera el resultado del paréntesis con el valor de la variable
+                return parse(operacionF);
+            }else if(!variables.containsKey(variable1)){
+                return (variable1 + " no está definida.");
+            }else if(!variables.containsKey(variable2)){
+                return (variable2 + " no está definida.");
+            }else if (!variables.containsKey(variable1) && !variables.containsKey(variable2)){
+                return (variable1 + " no está definida. " + variable2 + " no está definida.");
+            }
+        }
+
+        //operaciones dentro de operaciones. Dos paréntesis a la IZQUIERDA. Variable en posición 2.
+        pattern = Pattern.compile("^[(]{1}[+*-/]+ [(]{1}[+*-/] [A-z.]+ [0-9.]+[)]{1} +[0-9.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  //Regex
+        matcher = pattern.matcher(linea);
+
+        if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+
+            String operacion = datos[0];
+            String operador = datos[1];
+            String variable = datos[2];
+            String num1 = datos[3];
+            String num2 = datos[4];
+
+            if(variables.containsKey(variable)){
+                String valorVariable = variables.get(variable);
+                String suboperacion = "(" + operador + " " + valorVariable + " " + num1 + ")"; //evalúa el paréntesis
+                String resultado = parse(suboperacion); //guarda el resultado del paréntesis
+                String operacionF = "(" + operacion + " " + resultado + " " + num2 + ")"; //opera el resultado del paréntesis con el valor de la variable
+                return parse(operacionF);
+            }else{
+                return (variable + " no está definida.");
+            }
+        }
+
+        //operaciones dentro de operaciones. Dos paréntesis a la IZQUIERDA. Variable en posición 3.
+        pattern = Pattern.compile("^[(]{1}[+*-/]+ [(]{1}[+*-/] [0-9.]+ [A-z.]+[)]{1} +[0-9.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  //Regex
+        matcher = pattern.matcher(linea);
+
+        if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+
+            String operacion = datos[0];
+            String operador = datos[1];
+            String num1 = datos[2];
+            String variable = datos[3];
+            String num2 = datos[4];
+
+            if(variables.containsKey(variable)){
+                String valorVariable = variables.get(variable);
+                String suboperacion = "(" + operador + " " + num1 + " " + valorVariable + ")"; //evalúa el paréntesis
+                String resultado = parse(suboperacion); //guarda el resultado del paréntesis
+                String operacionF = "(" + operacion + " " + resultado + " " + num2 + ")"; //opera el resultado del paréntesis con el valor de la variable
+                return parse(operacionF);
+            }else{
+                return (variable + " no está definida.");
+            }
+        }
+
+        //operaciones dentro de operaciones. Dos paréntesis a la IZQUIERDA. Variable en posición 4.
+        pattern = Pattern.compile("^[(]{1}[+*-/]+ [(]{1}[+*-/] [0-9.]+ [0-9.]+[)]{1} +[A-z.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  //Regex
+        matcher = pattern.matcher(linea);
+
+        if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+
+            String operacion = datos[0];
+            String operador = datos[1];
+            String num1 = datos[2];
+            String num2 = datos[3];
+            String variable = datos[4];
+
+            if(variables.containsKey(variable)){
+                String valorVariable = variables.get(variable);
+                String suboperacion = "(" + operador + " " + num1 + " " + num2 + ")"; //evalúa el paréntesis
+                String resultado = parse(suboperacion); //guarda el resultado del paréntesis
+                String operacionF = "(" + operacion + " " + resultado + " " + valorVariable + ")"; //opera el resultado del paréntesis con el valor de la variable
+                return parse(operacionF);
+            }else{
+                return (variable + " no está definida.");
+            }
+        }
+
+        //operaciones dentro de operaciones. Dos paréntesis a la IZQUIERDA. Dos variables [2], [3]
+        pattern = Pattern.compile("^[(]{1}[+*-/]+ [(]{1}[+*-/] [A-z.]+ +[A-z.][)]{1} +[0-9.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  //Regex
+        matcher = pattern.matcher(linea);
+
+        if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+
+            String operacion = datos[0];
+            String operador = datos[1];
+            String variable1 = datos[2];
+            String variable2 = datos[3];
+            String num1 = datos[4];
+
+            if (variables.containsKey(variable1) && variables.containsKey(variable2)){
+                String valorVariable1 = variables.get(variable1);
+                String valorVariable2 = variables.get(variable2);
+                String suboperacion = "(" + operador + " " + valorVariable1 + " " + valorVariable2 + ")"; //evalúa el paréntesis
+                String resultado = parse(suboperacion); //guarda el resultado del paréntesis
+                String operacionF = "(" + operacion + " " + resultado + " " + num1 + ")"; //opera el resultado del paréntesis con el valor de la variable
+                return parse(operacionF);
+            }else if(!variables.containsKey(variable1)){
+                return (variable1 + " no está definida.");
+            }else if(!variables.containsKey(variable2)){
+                return (variable2 + " no está definida.");
+            }else if (!variables.containsKey(variable1) && !variables.containsKey(variable2)){
+                return (variable1 + " no está definida. " + variable2 + " no está definida.");
+            }
+        }
+
+        //operaciones dentro de operaciones. Dos paréntesis a la IZQUIERDA. Dos variables [3], [4]
+        pattern = Pattern.compile("^[(]{1}[+*-/]+ [(]{1}[+*-/] [0-9.]+ +[A-z.][)]{1} +[A-z.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  //Regex
+        matcher = pattern.matcher(linea);
+
+        if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+
+            String operacion = datos[0];
+            String operador = datos[1];
+            String num1 = datos[2];
+            String variable1 = datos[3];
+            String variable2 = datos[4];
+
+            if (variables.containsKey(variable1) && variables.containsKey(variable2)){
+                String valorVariable1 = variables.get(variable1);
+                String valorVariable2 = variables.get(variable2);
+                String suboperacion = "(" + operador + " " + num1 + " " + valorVariable1 + ")"; //evalúa el paréntesis
+                String resultado = parse(suboperacion); //guarda el resultado del paréntesis
+                String operacionF = "(" + operacion + " " + resultado + " " + valorVariable2 + ")"; //opera el resultado del paréntesis con el valor de la variable
+                return parse(operacionF);
+            }else if(!variables.containsKey(variable1)){
+                return (variable1 + " no está definida.");
+            }else if(!variables.containsKey(variable2)){
+                return (variable2 + " no está definida.");
+            }else if (!variables.containsKey(variable1) && !variables.containsKey(variable2)){
+                return (variable1 + " no está definida. " + variable2 + " no está definida.");
+            }
+        }
+
+        //operaciones dentro de operaciones. Dos paréntesis a la IZQUIERDA. Dos variables [2], [4]
+        pattern = Pattern.compile("^[(]{1}[+*-/]+ [(]{1}[+*-/] [A-z.]+ +[0-9.][)]{1} +[A-z.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  //Regex
+        matcher = pattern.matcher(linea);
+
+        if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+
+            String operacion = datos[0];
+            String operador = datos[1];
+            String variable1 = datos[2];
+            String num1 = datos[3];
+            String variable2 = datos[4];
+
+            if (variables.containsKey(variable1) && variables.containsKey(variable2)){
+                String valorVariable1 = variables.get(variable1);
+                String valorVariable2 = variables.get(variable2);
+                String suboperacion = "(" + operador + " " + valorVariable1 + " " + num1 + ")"; //evalúa el paréntesis
+                String resultado = parse(suboperacion); //guarda el resultado del paréntesis
+                String operacionF = "(" + operacion + " " + resultado + " " + valorVariable2 + ")"; //opera el resultado del paréntesis con el valor de la variable
+                return parse(operacionF);
+            }else if(!variables.containsKey(variable1)){
+                return (variable1 + " no está definida.");
+            }else if(!variables.containsKey(variable2)){
+                return (variable2 + " no está definida.");
+            }else if (!variables.containsKey(variable1) && !variables.containsKey(variable2)){
+                return (variable1 + " no está definida. " + variable2 + " no está definida.");
+            }
+        }
+
+        //operaciones dentro de operaciones. Dos paréntesis a la IZQUIERDA. Dos variables [2], [3], [4]
+        pattern = Pattern.compile("^[(]{1}[+*-/]+ [(]{1}[+*-/] [A-z.]+ +[A-z.][)]{1} +[A-z.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  //Regex
+        matcher = pattern.matcher(linea);
+
+        if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+
+            String operacion = datos[0];
+            String operador = datos[1];
+            String variable1 = datos[2];
+            String variable2 = datos[3];
+            String variable3 = datos[4];
+
+            if (variables.containsKey(variable1) && variables.containsKey(variable2)){
+                String valorVariable1 = variables.get(variable1);
+                String valorVariable2 = variables.get(variable2);
+                String valorVariable3 = variables.get(variable3);
+                String suboperacion = "(" + operador + " " + valorVariable1 + " " + valorVariable2 + ")"; //evalúa el paréntesis
+                String resultado = parse(suboperacion); //guarda el resultado del paréntesis
+                String operacionF = "(" + operacion + " " + resultado + " " + valorVariable3 + ")"; //opera el resultado del paréntesis con el valor de la variable
+                return parse(operacionF);
+            }else if(!variables.containsKey(variable1)){
+                return (variable1 + " no está definida.");
+            }else if(!variables.containsKey(variable2)){
+                return (variable2 + " no está definida.");
+            }else if (!variables.containsKey(variable1) && !variables.containsKey(variable2)){
+                return (variable1 + " no está definida. " + variable2 + " no está definida.");
             }
         }
 
