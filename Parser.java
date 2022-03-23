@@ -419,7 +419,29 @@ public class Parser {
                 String resultado2 = parse(suboperacion2);
                 String operacionF = "(" + datos[0] + " " + resultado1 + " " + resultado2 + ")";
                 return parse(operacionF);
-            }else {
+            }else{
+                return (variable + " no está definida.");
+            }
+        }
+
+        // Operaciones aritméticas simples. Variable a la derecha
+        pattern = Pattern.compile("^^[(]{1}[+*-/]{1} [0-9.]+ [A-z.]+[)]{1}", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
+        matcher = pattern.matcher(linea);
+
+        if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+
+            String operacion = datos[0];
+            String operando = datos[1];
+            String variable = datos[2];
+
+            if(variables.containsKey(variable)){
+                String valorVariable = variables.get(variable);
+                String newOp = "(" + operacion + " " + operando + " " + valorVariable + ")";
+                return parse(newOp);
+            }else{
                 return (variable + " no está definida.");
             }
         }
@@ -506,7 +528,52 @@ public class Parser {
                 String resultado2 = parse(suboperacion2);
                 String operacionF = "(" + datos[0] + " " + resultado1 + " " + resultado2 + ")";
                 return parse(operacionF);
-            }else {
+            }else{
+                return (variable + " no está definida.");
+            }
+        }
+
+    // Operaciones aritméticas simples. Variable a ambos lados
+    pattern = Pattern.compile("^[(]{1}[+*-/]{1} [A-z.]+ [A-z.]+[)]{1}", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
+    matcher = pattern.matcher(linea);
+
+        if(matcher.find()){
+        linea = linea.replace("(", "");
+        linea = linea.replace(")", "");
+        String[] datos = linea.split(" ");
+
+        String operacion = datos[0];
+        String variable1 = datos[1];
+        String variable2 = datos[2];
+
+        if(variables.containsKey(variable1)&&variables.containsKey(variable2) ){
+            String valorVariable1 = variables.get(variable1);
+            String valorVariable2 = variables.get(variable2);
+            String newOp = "(" + operacion + " " + valorVariable1 + " " + valorVariable2 + ")";
+            return parse(newOp);
+        }else{
+            return (variable1 +"y "+ variable2 + " no está definida.");
+        }
+    }
+
+        // Operaciones aritméticas simples una variable
+        pattern = Pattern.compile("^[(]{1}[+*-/]{2} [A-z.]+[)]{1}", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
+        matcher = pattern.matcher(linea);
+    
+            if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+    
+            String operacion = datos[0];
+            String variable = datos[1];
+
+    
+            if(variables.containsKey(variable)){
+                String valorVariable1 = variables.get(variable);
+                String newOp = "(" + operacion + " " + valorVariable1 + ")";
+                return parse(newOp);
+            }else{
                 return (variable + " no está definida.");
             }
         }
@@ -936,6 +1003,184 @@ public class Parser {
                 return (variable2 + " no está definida. " + variable3 + " no está definida.");
             }else if(!variables.containsKey(variable2) && !variables.containsKey(variable3) && !variables.containsKey(variable3) && !variables.containsKey(variable4)){
                 return (variable1 + " no está definida. " + variable2 + " no está definida. " + variable3 + " no está definida. " + variable4 + " no está definida.");
+            }
+        }
+        // Operaciones lógicas simples dos variables 
+        pattern = Pattern.compile("^[(]{1}[<>]{1}[=]{0,1} [A-z.] [A-z.][)]{1}", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
+        matcher = pattern.matcher(linea);
+    
+            if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+    
+            String operacion = datos[0];
+            String variable1 = datos[1];
+            String variable2 = datos[2];
+
+    
+            if(variables.containsKey(variable1)&& (variables.containsKey(variable2))){
+                String valorVariable1 = variables.get(variable1);
+                String valorVariable2 = variables.get(variable2);
+                String newOp = "(" + operacion + " " + valorVariable1+ " " + valorVariable2+ ")";
+                return parse(newOp);
+            }else{
+                return (variable1 + " no está definida.");
+            }
+        }
+
+ // Operaciones lógicas simples dos variables 
+        pattern = Pattern.compile("^[(]{1}[<>]{1}[=]{0,1} [A-z.] [A-z.][)]{1}", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
+        matcher = pattern.matcher(linea);
+    
+            if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+    
+            String operacion = datos[0];
+            String variable1 = datos[1];
+            String variable2 = datos[2];
+
+    
+            if(variables.containsKey(variable1)&& (variables.containsKey(variable2))){
+                String valorVariable1 = variables.get(variable1);
+                String valorVariable2 = variables.get(variable2);
+                String newOp = "(" + operacion + " " + valorVariable1+ " " + valorVariable2+ ")";
+                return parse(newOp);
+            }else{
+                return (variable1 + " no está definida.");
+            }
+        }
+
+         // Operaciones lógicas simples dos variables 
+        pattern = Pattern.compile("^[(]{1}[<>]{1}[=]{0,1} [A-z.] [A-z.][)]{1}", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
+        matcher = pattern.matcher(linea);
+    
+            if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+    
+            String operacion = datos[0];
+            String variable1 = datos[1];
+            String variable2 = datos[2];
+
+    
+            if(variables.containsKey(variable1)&& (variables.containsKey(variable2))){
+                String valorVariable1 = variables.get(variable1);
+                String valorVariable2 = variables.get(variable2);
+                String newOp = "(" + operacion + " " + valorVariable1+ " " + valorVariable2+ ")";
+                return parse(newOp);
+            }else{
+                return (variable1 + " no está definida.");
+            }
+        }
+    
+        // Operaciones lógicas simples variable derecha
+        pattern = Pattern.compile("^^[(]{1}[<>]{1}[=]{0,1} [0-9.] [A-z.][)]{1}", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
+        matcher = pattern.matcher(linea);
+            if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+
+            String operacion = datos[0];
+            String dato = datos[1];
+            String variable = datos[2];
+
+            if(variables.containsKey(variable)){
+                String valorVariable = variables.get(variable);
+                String newOp = "(" + operacion + " " + dato+ " " + valorVariable+ ")";
+                return parse(newOp);
+            }else{
+                return (variable + " no está definida.");
+            }
+        }
+
+        // Operaciones lógicas  variable izquierda
+        pattern = Pattern.compile("^[(]{1}[<>]{1}[=]{0,1} [A-z.] [0-9.][)]{1}", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
+        matcher = pattern.matcher(linea);
+            if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+
+            String operacion = datos[0];
+            String variable = datos[1];
+            String dato = datos[2];
+
+            if(variables.containsKey(variable)){
+                String valorVariable = variables.get(variable);
+                String newOp = "(" + operacion + " " + valorVariable+ " " + dato+ ")";
+                return parse(newOp);
+            }else{
+                return (variable + " no está definida.");
+            }
+        }
+
+        // Operaciones lógicas simples. == con variable izquierda
+        pattern = Pattern.compile("^[(]{1}[=]{2} [A-z.] [0-9.][)]{1}", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
+        matcher = pattern.matcher(linea);
+            if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+
+            String operacion = datos[0];
+            String variable = datos[1];
+            String dato = datos[2];
+
+            if(variables.containsKey(variable)){
+                String valorVariable = variables.get(variable);
+                String newOp = "(" + operacion + " " + valorVariable+ " " + dato+ ")";
+                return parse(newOp);
+            }else{
+                return (variable + " no está definida.");
+            }
+        }
+
+        // Operaciones lógicas simples. == con variable derecha
+        pattern = Pattern.compile("^[(]{1}[=]{2} [0-9.] [A-z.][)]{1}", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
+        matcher = pattern.matcher(linea);
+            if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+
+            String operacion = datos[0];
+            String dato = datos[1];
+            String variable = datos[2];
+
+            if(variables.containsKey(variable)){
+                String valorVariable = variables.get(variable);
+                String newOp = "(" + operacion + " " + dato+ " " + valorVariable+ ")";
+                return parse(newOp);
+            }else{
+                return (variable + " no está definida.");
+            }
+        }
+
+
+        // Operaciones lógicas simples. == con 2 variables
+        pattern = Pattern.compile("^[(]{1}[=]{2} [A-z.] [A-z.][)]{1}", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
+        matcher = pattern.matcher(linea);
+            if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+
+            String operacion = datos[0];
+            String variable1 = datos[1];
+            String variable2 = datos[2];
+
+            if(variables.containsKey(variable1)&& (variables.containsKey(variable2))){
+                String valorVariable1 = variables.get(variable1);
+                String valorVariable2 = variables.get(variable2);
+                String newOp = "(" + operacion + " " + valorVariable1+ " " + valorVariable2+ ")";
+                return parse(newOp);
+            }else{
+                return (variable1+" y "+ variable2 + " no están definidas.");
             }
         }
 
