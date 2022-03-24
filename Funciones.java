@@ -63,7 +63,7 @@ public class Funciones {
                             try {
                                 condR = Boolean.parseBoolean(localParser.parse(cond));
                             }catch (Exception g){
-                                return "Uso inválido de if";
+                                return "Uso inválido de la condicional 'IF'";
                             }
 
                             if(condR){
@@ -81,12 +81,7 @@ public class Funciones {
             }
             return Integer.toString(resultado);
         }
-         return "ERROR";
+         return "No se pudo evaluar la función";
 
     }
-
-    public String evalLong(String linea){
-        return "";
-    }
-
 }
