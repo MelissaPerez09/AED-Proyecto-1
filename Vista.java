@@ -64,12 +64,12 @@ public class Vista {
     public static ArrayList<String> getLinea(){
         ArrayList<String> funcion = new ArrayList<String>();
 		String linea;
-        System.out.println("\n" +"···");
+        System.out.print("\n" +"··· ");
                 
         linea = scan.nextLine();
         while(!linea.equals(("(END)"))){
             funcion.add(linea);
-            System.out.println("\n" +"···");
+            System.out.print("\n" +"··· ");
             linea = scan.nextLine();
         } 
 		return funcion;

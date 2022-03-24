@@ -35,6 +35,13 @@ public class Funciones {
                 resultado += Double.parseDouble(localParser.parse(linea));
             }
             return Double.toString(resultado);
+        }else if(!var.contains(".")){
+            int resultado = 0;
+            for (int i = 0; i < procesos.size(); i++) {
+                String linea = procesos.get(i).replace(param, var);
+                resultado += Integer.parseInt(localParser.parse(linea));
+            }
+            return Integer.toString(resultado);
         }
          return "ERROR";
 
