@@ -1190,11 +1190,13 @@ public class Parser {
         // **************************************************************************************************** //
 
          // Definicion de funciones
-        pattern = Pattern.compile("^[(]{1}DEFUN{1} [A-z.]+[(][A-z.]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
+        pattern = Pattern.compile("^[(]{1}DEFUN [A-z.]+ [(][A-z.]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);
         if(matcher.find()){
             ArrayList<String> nuevalinea = Vista.getLinea();
             Funciones funcion = new Funciones(linea, nuevalinea);
+            funciones.add(funcion);
+            return "Se definió la función";
         }
 
         //Uso de funciones personalizadas
