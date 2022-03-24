@@ -54,7 +54,10 @@ public class Vista {
     */
     public void ayuda(){
         mensaje("\n >>>Help: ");
-        mensaje("\n Para definir una operacion debe ingresarlas en formato lisp. Ejemplo: (+ 2 3)\n Para definir una variable debe ingresarla de la siguiente forma: (let nombredelavaribale valordelavariable)");
+        mensaje("\nPara definir una operacion debe ingresarlas en formato lisp. Ejemplo: (+ 2 3)\n");
+        mensaje("Para definir una variable, se usa el comando 'let'. Ejemplo '(let var 1)\n");
+        mensaje("Para definir una función, se usa el comando 'DEFUN'. Se necesita un parámetro para cada función. Ejemplo '(DEFUN myFUnc (x))'\n");
+        mensaje("\tSe abrirá un editor, donde puede ingresar todas las líneas de las funciones. Para finalizar, utilice '(END)'\n");
     }
 
     /**
