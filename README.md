@@ -1,10 +1,11 @@
-# Proyecto 1
- Intérprete para lisp
+# Algoritmos y Estructuras de Datos
+## Proyecto 1
+### Intérprete para lisp
 
 ## Integrantes
 
-*Mark Albrand*
-
-*Jimena Hernández*
-
-*Emily Pérez*
+```diff
++ Mark Albrand/21004
++ Jimena Hernández/21199
++ Emily Pérez/21385
+```
