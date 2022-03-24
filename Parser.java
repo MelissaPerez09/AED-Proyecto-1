@@ -1190,7 +1190,7 @@ public class Parser {
         // **************************************************************************************************** //
 
          // Definicion de funciones
-        pattern = Pattern.compile("^[(]{1}DEFUN [A-z.]+ [(][A-z.]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
+        pattern = Pattern.compile("^[(]{1}DEFUN [A-z]+ [(][A-z.]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);
         if(matcher.find()){
             ArrayList<String> nuevalinea = Vista.getLinea();
@@ -1200,7 +1200,7 @@ public class Parser {
         }
 
         //Uso de funciones personalizadas
-        pattern = Pattern.compile("^[(]{1}[A-z.]+ [(][0-9.]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
+        pattern = Pattern.compile("^[(]{1}[A-z]+ [(][0-9.]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);
         if(matcher.find()){
             linea = linea.replace("(", "");
@@ -1212,13 +1212,60 @@ public class Parser {
 
             for (int i = 0; i < funciones.size(); i++) {
                 if (funciones.get(i).getNombre().equals(funcion)){
-                    return funciones.get(i).eval(variable);
+                    return funciones.get(i).eval(variable, funciones);
                 }
             }
+
+            return "La función no está definida";
+        }
+
+        //Uso de funciones personalizadas
+        pattern = Pattern.compile("^[(]{1}[+\\-*/]{1} [(]{1}[A-z]+ [(][+\\-*/]{1} [0-9.]+ [0-9.]+[)]{2} [(]{1}[A-z]+ [(][+\\-*/]{1} [0-9.]+ [0-9.]+[)]{3}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
+        matcher = pattern.matcher(linea);
+        if(matcher.find()){
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+
+            String funcion1 = datos[1];
+            String variable1 = datos[3];
+            String funcion2 = datos[5];
+            String variable2 = datos[7];
+
+            String r1 = "";
+            String r2 = "";
+
+            for (int i = 0; i < funciones.size(); i++) {
+                if (funciones.get(i).getNombre().equals(funcion1)){
+                    String var1 = "(" + datos[2] + " " + datos[3] + " " + datos[4] + ")";
+                    var1 = parse(var1);
+                    String op1 = "(" + funcion1 + " (" + var1 + "))";
+                    r1 = parse(op1);
+                }
+            }
+
+            for (int i = 0; i < funciones.size(); i++) {
+                if (funciones.get(i).getNombre().equals(funcion2)){
+                    String var2 = "(" + datos[6] + " " + datos[7] + " " + datos[8] + ")";
+                    var2 = parse(var2);
+                    String op2 = "(" + funcion2 + " (" + var2 + "))";
+                    r2 = parse(op2);
+                }
+            }
+
+            String opF = "(" + datos[0] + " " + r1 + " " + r2 + ")";
+            return parse(opF);
+
+
+
+            //return "La función no está definida";
         }
 
 
         return "Expresión inválida. Ingrese '(EXIT)' para salir.";
     }
 
+    public void setFunciones(ArrayList<Funciones> funciones) {
+        this.funciones = funciones;
+    }
 }

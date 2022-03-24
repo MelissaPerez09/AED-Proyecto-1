@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 public class Funciones {
     private String param;
@@ -26,8 +27,9 @@ public class Funciones {
         return nombre;
     }
 
-    public String eval(String var){
+    public String eval(String var, ArrayList<Funciones> funcs){
         Parser localParser = new Parser();
+        localParser.setFunciones(funcs);
         if(var.contains(".")){
             double resultado = 0;
             for (int i = 0; i < procesos.size(); i++) {
@@ -39,12 +41,52 @@ public class Funciones {
             int resultado = 0;
             for (int i = 0; i < procesos.size(); i++) {
                 String linea = procesos.get(i).replace(param, var);
-                resultado += Integer.parseInt(localParser.parse(linea));
+                try{  // Operación normal
+                    resultado += Integer.parseInt(localParser.parse(linea));
+                }catch (Exception e){  // Operación no reconocida
+                    try{
+                        String resultado1 = localParser.parse(linea);
+                        if(resultado1.equals("Expresión inválida. Ingrese '(EXIT)' para salir.")){
+                            throw new InputMismatchException();
+                        }
+                    }catch (Exception f){
+                        linea = linea.replace("(", "");
+                        linea = linea.replace(")", "");
+                        String[] detalle = linea.split(" ");
+
+
+                        String func = detalle[0];
+
+                        if(func.equals("if")){
+                            String cond = "(" + detalle[1] + " " + detalle[2] + " " + detalle[3] + ")";
+                            boolean condR = false;
+                            try {
+                                condR = Boolean.parseBoolean(localParser.parse(cond));
+                            }catch (Exception g){
+                                return "Uso inválido de if";
+                            }
+
+                            if(condR){
+                                continue;
+                            }else {
+                                i++;
+                            }
+                        }else if (func.equals("return")){
+                            return detalle[1].toString();
+                        }
+
+                    }
+
+                }
             }
             return Integer.toString(resultado);
         }
          return "ERROR";
 
+    }
+
+    public String evalLong(String linea){
+        return "";
     }
 
 }
