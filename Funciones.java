@@ -84,9 +84,4 @@ public class Funciones {
          return "No se pudo evaluar la función";
 
     }
-
-    public String evalLong(String linea){
-        return "";
-    }
-
 }
