@@ -39,7 +39,8 @@ Este intérprete permite ejecutar operaciones de Lisp y obtener los resultados e
 
 ## Restricciones
 1. La condicional `if` es exclusiva para las funciones, la siguiente línea debe de ser su return. La siguiente a esta debe ser el return en un caso `else` (sin esta palabra)
-2. Las funciones deben llevar un parámetro3. 
+2. Las funciones deben llevar un parámetro
+3. Las funciones aceptan únicamente dos parámetros. Operaciones como `increment` utilizan una sola variable
 
 ## Forma de trabajo
 ```diff
