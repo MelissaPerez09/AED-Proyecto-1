@@ -40,3 +40,11 @@ Este intérprete permite ejecutar operaciones de Lisp y obtener los resultados e
 ## Restricciones
 1. La condicional `if` es exclusiva para las funciones, la siguiente línea debe de ser su return. La siguiente a esta debe ser el return en un caso `else` (sin esta palabra)
 2. Las funciones deben llevar un parámetro3. 
+
+##Forma de trabajo
+```diff
+Para realizar este trabajo nos basamos en:
++ Github issues que puede ser revisado en "issues" del proyecto.
++ "Github Proyects" 
++ "Trello"
+```
