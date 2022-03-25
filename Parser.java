@@ -254,7 +254,7 @@ public class Parser {
 
 
         // Definición de variables
-        pattern = Pattern.compile("[(]{1}let [A-z]+ [0-9.]+|[\"]+[A-z]+[\"]+[)]{1}$", Pattern.CASE_INSENSITIVE);  // Regex para una definición de variable
+        pattern = Pattern.compile("[(]{1}setq [A-z]+ [0-9.]+|[\"]+[A-z]+[\"]+[)]{1}$", Pattern.CASE_INSENSITIVE);  // Regex para una definición de variable
         matcher = pattern.matcher(linea);
 
         if(matcher.find()){
@@ -274,7 +274,7 @@ public class Parser {
 
 
         //operaciones dentro de operaciones con dos paréntesis a la derecha
-        pattern = Pattern.compile("^[(]{1}[\\-+\\*/] [0-9.]+ [(]{1}.+[)]{2}$", Pattern.CASE_INSENSITIVE);  //Regex
+        pattern = Pattern.compile("^[(]{1}[+*-/] [0-9.]+ [(]{1}.+[)]{2}$", Pattern.CASE_INSENSITIVE);  //Regex
         matcher = pattern.matcher(linea);
 
         if(matcher.find()){
@@ -305,7 +305,7 @@ public class Parser {
 
 
         //operaciones dentro de operaciones con dos paréntesis a la izquierda
-        pattern = Pattern.compile("^[(]{1}[\\-+\\*/] [(][\\-+\\*/] [0-9.]+ [0-9.]+[)]{1} [0-9.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  //Regex
+        pattern = Pattern.compile("^[(]{1}[+*-/] [(][+*-/] [0-9.]+ [0-9.]+[)]{1} [0-9.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  //Regex
         matcher = pattern.matcher(linea);
         if (matcher.find()){
             linea = linea.replace("(", "");
@@ -1596,7 +1596,7 @@ public class Parser {
         // **************************************************************************************************** //
 
          // Definicion de funciones
-        pattern = Pattern.compile("^[(]{1}DEFUN [A-z]+ [(][A-z.]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
+        pattern = Pattern.compile("^[(]{1}defun [A-z]+ [(][A-z.]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);
         if(matcher.find()){
             ArrayList<String> nuevalinea = Vista.getLinea();
@@ -1667,6 +1667,95 @@ public class Parser {
             //return "La función no está definida";
         }
 
+        //Uso de list
+        pattern = Pattern.compile("[(]{1}list [0-9.]+|[A-z.]+ [0-9.]+|[A-z.]+[0-9.]+|[A-z.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
+        matcher = pattern.matcher(linea);
+        if(matcher.find()) {
+            linea = linea.replace("(", "");
+            linea = linea.replace(")", "");
+            String[] datos = linea.split(" ");
+            String resultado = "(";
+            String dato1 = datos[1];
+            String dato2 = datos[2];
+            String dato3 = datos[3];
+
+            if (!dato1.contains("'")) {
+                if(variables.containsKey(dato1)) {
+                    dato1 = variables.get(dato1);
+                    resultado += dato1 + ", ";
+                }else {
+                    resultado += dato1 + ", ";
+                }
+
+            }else {
+                resultado += dato1.replace("'","")+ ", ";
+            }
+
+            if (!dato2.contains("'")) {
+
+                if(variables.containsKey(dato2)) {
+                    dato2 = variables.get(dato2);
+                    resultado += dato2 + ", ";
+                }else {
+                    resultado += dato2 + ", ";
+                }
+
+            }else {
+                resultado += dato2.replace("'","")+ ", ";
+            }
+
+            if (!dato3.contains("'")) {
+
+                if(variables.containsKey(dato3)) {
+                    dato3 = variables.get(dato3);
+                    resultado += dato3 + ")";
+                }else {
+                    resultado += dato3 + ")";
+                }
+
+
+            }else {
+                resultado += dato3.replace("'","") + ")";
+            }
+
+            return  resultado;
+
+        }
+
+        //predicado ATOM true
+        pattern = Pattern.compile("^[(]{1}atom+ [0-9.a-z'()]+[)]{1}$", Pattern.CASE_INSENSITIVE);  //Regex
+        matcher = pattern.matcher(linea);
+
+        if(matcher.find()){
+            return "true";
+        } 
+
+        //predicado ATOM false 
+        pattern = Pattern.compile("^[(]{1}atom+ [(]+[A-z.]+ [0-9.A-z]+[)]{2}$", Pattern.CASE_INSENSITIVE);  //Regex
+        matcher = pattern.matcher(linea);
+        if(matcher.find()){
+            return "false";
+        }
+        pattern = Pattern.compile("^[(]{1}atom+ [(]+[A-z.]+ [0-9.A-z]+ [0-9.A-z]+[)]{2}$", Pattern.CASE_INSENSITIVE);  //Regex
+        matcher = pattern.matcher(linea);
+        if(matcher.find()){
+            return "false";
+        }
+        pattern = Pattern.compile("^[(]{1}atom+ [+*-/!@#$%^&]+[)]{1}$", Pattern.CASE_INSENSITIVE);  //Regex
+        matcher = pattern.matcher(linea);
+        if(matcher.find()){
+            return "false";
+        }
+        pattern = Pattern.compile("^[(]{1}atom+ [+*-/!@#$%^&]+ [0-9.A-z]+[)]{1}$", Pattern.CASE_INSENSITIVE);  //Regex
+        matcher = pattern.matcher(linea);
+        if(matcher.find()){
+            return "false";
+        }
+        pattern = Pattern.compile("^[(]{1}atom+ [+*-/!@#$%^&]+ [0-9.A-z]+ [0-9.A-z][)]{1}$", Pattern.CASE_INSENSITIVE);  //Regex
+        matcher = pattern.matcher(linea);
+        if(matcher.find()){
+            return "false";
+        }
 
         return "Expresión inválida. Ingrese '(EXIT)' para salir.";
     }

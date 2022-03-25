@@ -52,7 +52,7 @@ class ParserTest {
         assertEquals("true", resultado );
 
         //Una Variable
-        parser.parse("(Let x 5)");
+        parser.parse("(setq x 5)");
         resultado=parser.parse("(+ x 5)");
         assertEquals("10",resultado );
 
@@ -85,7 +85,7 @@ class ParserTest {
         assertEquals("8",resultado );
 
         // Operaciones aritméticas simples. Variable a ambos lados
-        parser.parse("(Let a 10)");
+        parser.parse("(setq a 10)");
         resultado=parser.parse("(+ x a)");
         assertEquals("15",resultado );
 
@@ -94,24 +94,24 @@ class ParserTest {
         assertEquals("30",resultado );
 
         //operaciones dentro de operaciones con  paréntesis y con cuatro variables
-        parser.parse("(Let b 10)");
+        parser.parse("(setq b 10)");
         resultado=parser.parse("(+ (+ a b) (+ a x))");
         assertEquals("35",resultado );
 
         //operaciones dentro de operaciones con  paréntesis y con cuatro variables
-        parser.parse("(Let z 1.2)");
+        parser.parse("(setq z 1.2)");
         resultado=parser.parse("(+ (+ b z) (+ a x))");
         assertEquals("26.2",resultado );
 
         // Operaciones lógicas simples dos variables
-        parser.parse("(Let m 1)");
-        parser.parse("(Let n 1)");
+        parser.parse("(setq m 1)");
+        parser.parse("(setq n 1)");
         resultado=parser.parse("(== m n)");
         assertEquals("true",resultado );
 
         // Operaciones lógicas simples dos variables y floats
-        parser.parse("(Let m 1)");
-        parser.parse("(Let n 1)");
+        parser.parse("(setq m 1)");
+        parser.parse("(setq n 1)");
         resultado=parser.parse("(== m b)");
         assertEquals("false",resultado );
 
@@ -123,7 +123,9 @@ class ParserTest {
         resultado=parser.parse("(<= m n)");
         assertEquals("true",resultado );
 
-
+        //Uso de list
+        resultado=parser.parse("(list 1 'm 1)");
+        assertEquals("(1, m, 1)",resultado );
     }
 
 }
