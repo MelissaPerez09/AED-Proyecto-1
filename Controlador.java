@@ -1,14 +1,14 @@
 /**
- * Universidad del Valle de Guatemala
+ * Permite hacer las operaciones.
  * @author Jimena Hernandez/21199
  * @author Mark Albrand/21004
  * @author Emily Perez/21385
  * @version 24/03/2022
- * Algoritmos y estructuras de Datos 
+ * Universidad del Valle de Guatemala
+ * Algoritmos y estructuras de Datos
  * Proyecto 01 - interprete LISP
- * 
- * Aritmeticos.java 
- * Permite hacer las operaciones.
+ *
+ * Aritmeticos.java
  */
 
 public class Controlador {

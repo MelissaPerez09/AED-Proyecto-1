@@ -1,14 +1,14 @@
 /**
- * Universidad del Valle de Guatemala
+ * Guarda y ejecuta funciones personalizadas del usuario
  * @author Jimena Hernandez/21199
  * @author Mark Albrand/21004
  * @author Emily Perez/21385
  * @version 24/03/2022
- * Algoritmos y estructuras de Datos 
+ * Universidad del Valle de Guatemala
+ * Algoritmos y estructuras de Datos
  * Proyecto 01 - interprete LISP
- * 
- * Funciones.java 
- * Desarrolla las funciones y sus definiciones
+ *
+ * Funciones.java
  */
 
  //LIBRERIAS

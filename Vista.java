@@ -1,14 +1,14 @@
 /**
- * Universidad del Valle de Guatemala
+ * Permite ingresar y mostrar datos.
  * @author Jimena Hernandez/21199
  * @author Mark Albrand/21004
  * @author Emily Perez/21385
  * @version 24/03/2022
- * Algoritmos y estructuras de Datos 
+ * Universidad del Valle de Guatemala
+ * Algoritmos y estructuras de Datos
  * Proyecto 01 - interprete LISP
- * 
- * Logicas.java 
- * Permite ingresar y mostrar datos.
+ *
+ * Logicas.java
  */
 
 //LIBRERIAS
