@@ -1,12 +1,32 @@
+/**
+ * Universidad del Valle de Guatemala
+ * @author Jimena Hernandez/21199
+ * @author Mark Albrand/21004
+ * @author Emily Perez/21385
+ * @version 24/03/2022
+ * Algoritmos y estructuras de Datos 
+ * Proyecto 01 - interprete LISP
+ * 
+ * Funciones.java 
+ * Desarrolla las funciones y sus definiciones
+ */
+
+ //LIBRERIAS
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
 public class Funciones {
+    
+    //PRODPIEDADES
     private String param;
     private String nombre;
     private ArrayList<String> procesos = new ArrayList<>();
 
-    // (DEFUN FUN (X))
+    /**
+     * (DEFUN FUN (X))
+     * @param definicion
+     * @param lineas
+     */
     public Funciones(String definicion, ArrayList<String> lineas){
         definicion = definicion.replace("(", "");
         definicion = definicion.replace(")", "");
@@ -19,14 +39,23 @@ public class Funciones {
             if(lineas.get(i) != null){
                 this.procesos.add(lineas.get(i));
             }
-
         }
     }
 
+    /**
+     * Método para obtener nombre
+     * @return nombre
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * Método para evaluar la función
+     * @param var
+     * @param funcs
+     * @return resultado
+     */
     public String eval(String var, ArrayList<Funciones> funcs){
         Parser localParser = new Parser();
         localParser.setFunciones(funcs);
@@ -74,14 +103,12 @@ public class Funciones {
                         }else if (func.equals("return")){
                             return detalle[1].toString();
                         }
-
                     }
 
                 }
             }
             return Integer.toString(resultado);
         }
-         return "No se pudo evaluar la función";
-
+        return "No se pudo evaluar la función";
     }
 }

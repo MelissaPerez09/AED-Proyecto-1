@@ -3,7 +3,7 @@
  * @author Jimena Hernandez/21199
  * @author Mark Albrand/21004
  * @author Emily Perez/21385
- * @version 03/03/2022
+ * @version 24/03/2022
  * Algoritmos y estructuras de Datos 
  * Proyecto 01 - interprete LISP
  * 
@@ -12,6 +12,8 @@
  */
 
 public class Logicas{
+
+    //PROPIEDADES
     boolean resultado = true;
 
     /**

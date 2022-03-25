@@ -1,19 +1,25 @@
 /**
- * Esta es la clase que permite hacer las operaciones.
  * Universidad del Valle de Guatemala
- * @author Mark Albrand
- * @author Jimena Hernández
- * @author Emily Pérez
- * @version 2-mar-22
+ * @author Jimena Hernandez/21199
+ * @author Mark Albrand/21004
+ * @author Emily Perez/21385
+ * @version 24/03/2022
+ * Algoritmos y estructuras de Datos 
+ * Proyecto 01 - interprete LISP
+ * 
+ * Aritmeticos.java 
+ * Permite hacer las operaciones.
  */
+
 public class Controlador {
 
-    /**
-    * Main del programa.
-    **/ 
+    //PROPIEDADES
     private static Vista vista = new Vista();
     private static Parser parser = new Parser();
 
+    /**
+    * Método Main del programa
+    **/ 
     public static void main(String[] args){
         String input= "";
 
@@ -31,7 +37,6 @@ public class Controlador {
             }
         }
         vista.salida();
-        
     }
 
 }

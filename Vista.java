@@ -1,17 +1,24 @@
 /**
- * Esta es la clase que permite ingresar y mostrar datos.
  * Universidad del Valle de Guatemala
- * @author Mark Albrand
- * @author Jimena Hernández
- * @author Emily Pérez
- * @version 2-mar-22
+ * @author Jimena Hernandez/21199
+ * @author Mark Albrand/21004
+ * @author Emily Perez/21385
+ * @version 24/03/2022
+ * Algoritmos y estructuras de Datos 
+ * Proyecto 01 - interprete LISP
+ * 
+ * Logicas.java 
+ * Permite ingresar y mostrar datos.
  */
 
+//LIBRERIAS
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Vista {
+    
+    //PROPIEDADES
     private static Scanner scan = new Scanner(System.in);
 
     /**
@@ -34,7 +41,6 @@ public class Vista {
      * @return operacion
      */
     public String getOperacion(){
-
         mensaje("\n >>> ");
         return scan.nextLine();
     }

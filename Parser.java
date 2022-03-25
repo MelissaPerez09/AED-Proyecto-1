@@ -1,12 +1,17 @@
 /**
- * Esta es la clase que evalúa una operación del lenguaje LISP
  * Universidad del Valle de Guatemala
- * @author Mark Albrand
- * @author Jimena Hernández
- * @author Emily Pérez
- * @version 2-mar-22
+ * @author Jimena Hernandez/21199
+ * @author Mark Albrand/21004
+ * @author Emily Perez/21385
+ * @version 24/03/2022
+ * Algoritmos y estructuras de Datos 
+ * Proyecto 01 - interprete LISP
+ * 
+ * Parser.java 
+ * Evalúa una operación del lenguaje LISP
  */
 
+//LIBRERIAS
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
@@ -14,8 +19,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
+
+    //PROPIEDADES
     private HashMap<String, String> variables = new HashMap<String, String>();  // Almacenamiento de las variables personales
     private ArrayList<Funciones> funciones = new ArrayList<Funciones>();
+    
     /**
      * Método principal para evaluar una línea a código LISP
      * @param linea Línea ingresada por el usuario
@@ -269,7 +277,6 @@ public class Parser {
             variables.put(nombre, valor);
 
             return ("Se ha asignado correctamente " + nombre + " con el valor " + valor);
-
         }
 
 
@@ -307,6 +314,7 @@ public class Parser {
         //operaciones dentro de operaciones con dos paréntesis a la izquierda
         pattern = Pattern.compile("^[(]{1}[+*-/] [(][+*-/] [0-9.]+ [0-9.]+[)]{1} [0-9.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  //Regex
         matcher = pattern.matcher(linea);
+        
         if (matcher.find()){
             linea = linea.replace("(", "");
             linea = linea.replace(")", "");
@@ -424,6 +432,8 @@ public class Parser {
                 return (variable + " no está definida.");
             }
         }
+
+
         //operaciones dentro de operaciones. Dos paréntesis a la derecha. Variable en posición 1.
         pattern = Pattern.compile("^[(]{1}[+*-/]{1} [A-z.]+ [(]{1}[+*-/]+ [0-9.]+ [0-9.][)]{2}$", Pattern.CASE_INSENSITIVE);  //Regex
         matcher = pattern.matcher(linea);
@@ -476,6 +486,8 @@ public class Parser {
                 return (variable + " no está definida.");
             }
         }
+
+
         // Operaciones aritméticas simples. Variable a la derecha
         pattern = Pattern.compile("^^[(]{1}[+*-/]{1} [0-9.]+ [A-z.]+[)]{1}", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);
@@ -498,6 +510,7 @@ public class Parser {
                 return (variable + " no está definida.");
             }
         }
+
 
         // Variable en posición 2
         pattern = Pattern.compile("^[(]{1}[+*-\\/] [(]{1}[+*-\\/]+ [0-9.]+ [A-z]+[)]{1} [(]{1}[+*-\\/] [0-9.]+ [0-9.]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
@@ -527,6 +540,8 @@ public class Parser {
                 return (variable + " no está definida.");
             }
         }
+
+
         //operaciones dentro de operaciones. Dos paréntesis a la derecha. Variable en posición 4.
         pattern = Pattern.compile("^[(]{1}[+*-/]{1} [0-9.]+ [(]{1}[+*-/]+ [0-9.]+ [A-z.][)]{2}$", Pattern.CASE_INSENSITIVE);  //Regex
         matcher = pattern.matcher(linea);
@@ -552,6 +567,7 @@ public class Parser {
                 return (variable + " no está definida.");
             }
         }
+
 
         // Variable en posición 3
         pattern = Pattern.compile("^[(]{1}[+*-\\/] [(]{1}[+*-\\/]+ [0-9.]+ [0-9.]+[)]{1} [(]{1}[+*-\\/] [A-z]+ [0-9.]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
@@ -581,6 +597,8 @@ public class Parser {
                 return (variable + " no está definida.");
             }
         }
+
+
         //operaciones dentro de operaciones. Dos paréntesis a la derecha. Dos variables [1], [3]
         pattern = Pattern.compile("^[(]{1}[+*-/]{1} [A-z.]+ [(]{1}[+*-/]+ [A-z.]+ [0-9.][)]{2}$", Pattern.CASE_INSENSITIVE);  //Regex
         matcher = pattern.matcher(linea);
@@ -611,6 +629,7 @@ public class Parser {
                 return (variable1 + " no está definida. " + variable2 + " no está definida.");
             }
         }
+
 
         //operaciones dentro de operaciones. Dos paréntesis a la derecha. Dos variables [3], [4]
         pattern = Pattern.compile("^[(]{1}[+*-/]{1} [0-9.]+ [(]{1}[+*-/]+ [A-z.]+ [A-z.][)]{2}$", Pattern.CASE_INSENSITIVE);  //Regex
@@ -643,6 +662,7 @@ public class Parser {
             }
         }
 
+
         //operaciones dentro de operaciones. Dos paréntesis a la derecha. Dos variables [1], [4]
         pattern = Pattern.compile("^[(]{1}[+*-/]{1} [A-z.]+ [(]{1}[+*-/]+ [0-9.]+ [A-z.][)]{2}$", Pattern.CASE_INSENSITIVE);  //Regex
         matcher = pattern.matcher(linea);
@@ -673,6 +693,7 @@ public class Parser {
                 return (variable1 + " no está definida. " + variable2 + " no está definida.");
             }
         }
+
 
         //operaciones dentro de operaciones. Dos paréntesis a la derecha. Tres variables [1], [3], [4]
         pattern = Pattern.compile("^[(]{1}[+*-/]{1} [A-z.]+ [(]{1}[+*-/]+ [A-z.]+ [A-z.][)]{2}$", Pattern.CASE_INSENSITIVE);  //Regex
@@ -706,6 +727,7 @@ public class Parser {
             }
         }
 
+
         //operaciones dentro de operaciones. Dos paréntesis a la IZQUIERDA. Variable en posición 2.
         pattern = Pattern.compile("^[(]{1}[+*-/]+ [(]{1}[+*-/] [A-z.]+ [0-9.]+[)]{1} +[0-9.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  //Regex
         matcher = pattern.matcher(linea);
@@ -731,6 +753,7 @@ public class Parser {
                 return (variable + " no está definida.");
             }
         }
+
 
         // Variable en posición 4
         pattern = Pattern.compile("^[(]{1}[+*-\\/] [(]{1}[+*-\\/]+ [0-9.]+ [0-9.]+[)]{1} [(]{1}[+*-\\/] [0-9.]+ [A-z]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
@@ -760,6 +783,8 @@ public class Parser {
                 return (variable + " no está definida.");
             }
         }
+
+
         //operaciones dentro de operaciones. Dos paréntesis a la IZQUIERDA. Variable en posición 3.
         pattern = Pattern.compile("^[(]{1}[+*-/]+ [(]{1}[+*-/] [0-9.]+ [A-z.]+[)]{1} +[0-9.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  //Regex
         matcher = pattern.matcher(linea);
@@ -786,6 +811,7 @@ public class Parser {
             }
         }
 
+
         // Operaciones aritméticas simples. Variable a ambos lados
         pattern = Pattern.compile("^[(]{1}[+*-/]{1} [A-z.]+ [A-z.]+[)]{1}", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);
@@ -808,6 +834,8 @@ public class Parser {
                 return (variable1 +"y "+ variable2 + " no está definida.");
             }
         }
+
+
         //operaciones dentro de operaciones. Dos paréntesis a la IZQUIERDA. Variable en posición 4.
         pattern = Pattern.compile("^[(]{1}[+*-/]+ [(]{1}[+*-/] [0-9.]+ [0-9.]+[)]{1} +[A-z.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  //Regex
         matcher = pattern.matcher(linea);
@@ -833,6 +861,7 @@ public class Parser {
                 return (variable + " no está definida.");
             }
         }
+
 
         //operaciones dentro de operaciones. Dos paréntesis a la IZQUIERDA. Dos variables [2], [3]
         pattern = Pattern.compile("^[(]{1}[+*-/]+ [(]{1}[+*-/] [A-z.]+ +[A-z.][)]{1} +[0-9.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  //Regex
@@ -865,6 +894,7 @@ public class Parser {
             }
         }
 
+
         //operaciones dentro de operaciones. Dos paréntesis a la IZQUIERDA. Dos variables [3], [4]
         pattern = Pattern.compile("^[(]{1}[+*-/]+ [(]{1}[+*-/] [0-9.]+ +[A-z.][)]{1} +[A-z.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  //Regex
         matcher = pattern.matcher(linea);
@@ -896,6 +926,7 @@ public class Parser {
             }
         }
 
+
         //operaciones dentro de operaciones. Dos paréntesis a la IZQUIERDA. Dos variables [2], [4]
         pattern = Pattern.compile("^[(]{1}[+*-/]+ [(]{1}[+*-/] [A-z.]+ +[0-9.][)]{1} +[A-z.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  //Regex
         matcher = pattern.matcher(linea);
@@ -926,6 +957,7 @@ public class Parser {
                 return (variable1 + " no está definida. " + variable2 + " no está definida.");
             }
         }
+
 
         //operaciones dentro de operaciones. Dos paréntesis a la IZQUIERDA. Dos variables [2], [3], [4]
         pattern = Pattern.compile("^[(]{1}[+*-/]+ [(]{1}[+*-/] [A-z.]+ +[A-z.][)]{1} +[A-z.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  //Regex
@@ -962,7 +994,6 @@ public class Parser {
         }
 
     
-
         // Operaciones aritméticas simples una variable
         pattern = Pattern.compile("^[(]{1}[+*-/]{2} [A-z.]+[)]{1}", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);
@@ -984,6 +1015,7 @@ public class Parser {
                 return (variable + " no está definida.");
             }
         }
+
 
         // Dos variables
         // Variable en posición 1 y 2
@@ -1021,6 +1053,7 @@ public class Parser {
             }
         }
 
+
         // Variable en posición 1 y 3
         pattern = Pattern.compile("^[(]{1}[+*-\\/] [(]{1}[+*-\\/]+ [A-z]+ [0-9.]+[)]{1} [(]{1}[+*-\\/] [A-z]+ [0-9.]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);
@@ -1055,6 +1088,8 @@ public class Parser {
                 return (variable1 + " no está definida. " + variable2 + " no está definida.");
             }
         }
+
+
         // Variable en posición 1 y 4
         pattern = Pattern.compile("^[(]{1}[+*-\\/] [(]{1}[+*-\\/]+ [A-z]+ [0-9.]+[)]{1} [(]{1}[+*-\\/] [0-9.]+ [A-z]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);
@@ -1089,6 +1124,8 @@ public class Parser {
                 return (variable1 + " no está definida. " + variable2 + " no está definida.");
             }
         }
+
+
         // Variable en posición 2 y 4
         pattern = Pattern.compile("^[(]{1}[+*-\\/] [(]{1}[+*-\\/]+ [0-9.]+ [A-z]+[)]{1} [(]{1}[+*-\\/] [0-9.]+ [A-z]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);
@@ -1123,6 +1160,8 @@ public class Parser {
                 return (variable1 + " no está definida. " + variable2 + " no está definida.");
             }
         }
+
+
         // Variable en posición 3 y 4
         pattern = Pattern.compile("^[(]{1}[+*-\\/] [(]{1}[+*-\\/]+ [0-9.]+ [0-9.]+[)]{1} [(]{1}[+*-\\/] [A-z]+ [A-z]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);
@@ -1157,6 +1196,8 @@ public class Parser {
                 return (variable1 + " no está definida. " + variable2 + " no está definida.");
             }
         }
+
+
         // Variable en posición 2 y 3
         pattern = Pattern.compile("^[(]{1}[+*-\\/] [(]{1}[+*-\\/]+ [0-9.]+ [A-z]+[)]{1} [(]{1}[+*-\\/] [A-z]+ [0-9.]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);
@@ -1191,6 +1232,7 @@ public class Parser {
                 return (variable1 + " no está definida. " + variable2 + " no está definida.");
             }
         }
+
 
         // 3 variables
         // Variable en posición 1-2-3
@@ -1236,6 +1278,8 @@ public class Parser {
                 return (variable2 + " no está definida. " + variable3 + " no está definida.");
             }
         }
+
+
         // Variable en posición 1-2-4
         pattern = Pattern.compile("^[(]{1}[+*-\\/] [(]{1}[+*-\\/]+ [A-z]+ [A-z]+[)]{1} [(]{1}[+*-\\/] [0-9.]+ [A-z]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);
@@ -1279,6 +1323,8 @@ public class Parser {
                 return (variable2 + " no está definida. " + variable3 + " no está definida.");
             }
         }
+
+
         // Variable en posición 1-3-4
         pattern = Pattern.compile("^[(]{1}[+*-\\/] [(]{1}[+*-\\/]+ [A-z]+ [0-9.]+[)]{1} [(]{1}[+*-\\/] [A-z]+ [A-z]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);
@@ -1322,6 +1368,8 @@ public class Parser {
                 return (variable2 + " no está definida. " + variable3 + " no está definida.");
             }
         }
+
+
         // Variable en posición 2-3-4
         pattern = Pattern.compile("^[(]{1}[+*-\\/] [(]{1}[+*-\\/]+ [0-9.]+ [A-z]+[)]{1} [(]{1}[+*-\\/] [A-z]+ [A-z]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);
@@ -1365,6 +1413,7 @@ public class Parser {
                 return (variable2 + " no está definida. " + variable3 + " no está definida.");
             }
         }
+
 
         // 4 variables
         // Variable en posición 2-3-4
@@ -1412,6 +1461,8 @@ public class Parser {
                 return (variable1 + " no está definida. " + variable2 + " no está definida. " + variable3 + " no está definida. " + variable4 + " no está definida.");
             }
         }
+
+
         // Operaciones lógicas simples dos variables 
         pattern = Pattern.compile("^[(]{1}[<>]{1}[=]{0,1} [A-z.] [A-z.][)]{1}", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);
@@ -1425,7 +1476,6 @@ public class Parser {
             String variable1 = datos[1];
             String variable2 = datos[2];
 
-    
             if(variables.containsKey(variable1)&& (variables.containsKey(variable2))){
                 String valorVariable1 = variables.get(variable1);
                 String valorVariable2 = variables.get(variable2);
@@ -1436,7 +1486,8 @@ public class Parser {
             }
         }
 
- // Operaciones lógicas simples dos variables 
+
+        // Operaciones lógicas simples dos variables 
         pattern = Pattern.compile("^[(]{1}[<>]{1}[=]{0,1} [A-z.] [A-z.][)]{1}", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);
     
@@ -1448,7 +1499,6 @@ public class Parser {
             String operacion = datos[0];
             String variable1 = datos[1];
             String variable2 = datos[2];
-
     
             if(variables.containsKey(variable1)&& (variables.containsKey(variable2))){
                 String valorVariable1 = variables.get(variable1);
@@ -1459,6 +1509,7 @@ public class Parser {
                 return (variable1 + " no está definida.");
             }
         }
+
 
          // Operaciones lógicas simples dos variables 
         pattern = Pattern.compile("^[(]{1}[<>]{1}[=]{0,1} [A-z.] [A-z.][)]{1}", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
@@ -1484,6 +1535,7 @@ public class Parser {
             }
         }
     
+
         // Operaciones lógicas simples variable derecha
         pattern = Pattern.compile("^^[(]{1}[<>]{1}[=]{0,1} [0-9.] [A-z.][)]{1}", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);
@@ -1504,6 +1556,7 @@ public class Parser {
                 return (variable + " no está definida.");
             }
         }
+
 
         // Operaciones lógicas  variable izquierda
         pattern = Pattern.compile("^[(]{1}[<>]{1}[=]{0,1} [A-z.] [0-9.][)]{1}", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
@@ -1526,6 +1579,7 @@ public class Parser {
             }
         }
 
+
         // Operaciones lógicas simples. == con variable izquierda
         pattern = Pattern.compile("^[(]{1}[=]{2} [A-z.] [0-9.][)]{1}", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
         matcher = pattern.matcher(linea);
@@ -1546,6 +1600,7 @@ public class Parser {
                 return (variable + " no está definida.");
             }
         }
+
 
         // Operaciones lógicas simples. == con variable derecha
         pattern = Pattern.compile("^[(]{1}[=]{2} [0-9.] [A-z.][)]{1}", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
@@ -1591,8 +1646,8 @@ public class Parser {
             }
         }
 
-         // **************************************************************************************************** //
-        // **************************************** Función ************************************************* //
+        // **************************************************************************************************** //
+        // **************************************** Función *************************************************** //
         // **************************************************************************************************** //
 
          // Definicion de funciones
@@ -1604,6 +1659,7 @@ public class Parser {
             funciones.add(funcion);
             return "Se definió la función";
         }
+
 
         //Uso de funciones personalizadas
         pattern = Pattern.compile("^[(]{1}[A-z]+ [(][0-9.]+[)]{2}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
@@ -1624,6 +1680,7 @@ public class Parser {
 
             return "La función no está definida";
         }
+
 
         //Uso de funciones personalizadas
         pattern = Pattern.compile("^[(]{1}[+\\-*/]{1} [(]{1}[A-z]+ [(][+\\-*/]{1} [0-9.]+ [0-9.]+[)]{2} [(]{1}[A-z]+ [(][+\\-*/]{1} [0-9.]+ [0-9.]+[)]{3}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
@@ -1661,11 +1718,11 @@ public class Parser {
 
             String opF = "(" + datos[0] + " " + r1 + " " + r2 + ")";
             return parse(opF);
-
-
-
-            //return "La función no está definida";
         }
+
+        // **************************************************************************************************** //
+        // **************************************** Predicados ************************************************ //
+        // **************************************************************************************************** //
 
         //Uso de list
         pattern = Pattern.compile("[(]{1}list [0-9.]+|[A-z.]+ [0-9.]+|[A-z.]+[0-9.]+|[A-z.]+[)]{1}$", Pattern.CASE_INSENSITIVE);  // Regex para una operación simple
@@ -1717,9 +1774,7 @@ public class Parser {
             }else {
                 resultado += dato3.replace("'","") + ")";
             }
-
             return  resultado;
-
         }
 
         //predicado ATOM true
@@ -1729,6 +1784,7 @@ public class Parser {
         if(matcher.find()){
             return "true";
         } 
+
 
         //predicado ATOM false 
         pattern = Pattern.compile("^[(]{1}atom+ [(]+[A-z.]+ [0-9.A-z]+[)]{2}$", Pattern.CASE_INSENSITIVE);  //Regex
