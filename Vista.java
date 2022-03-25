@@ -64,6 +64,7 @@ public class Vista {
         mensaje("Para definir una variable, se usa el comando 'let'. Ejemplo '(let var 1)\n");
         mensaje("Para definir una función, se usa el comando 'DEFUN'. Se necesita un parámetro para cada función. Ejemplo '(DEFUN myFUnc (x))'\n");
         mensaje("\tSe abrirá un editor, donde puede ingresar todas las líneas de las funciones. Para finalizar, utilice '(END)'\n");
+        mensaje("\tPara más información: https://markalbrand56.github.io/AED-Proyecto-1/Funciones.html\n");
     }
 
     /**
