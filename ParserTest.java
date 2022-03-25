@@ -123,7 +123,9 @@ class ParserTest {
         resultado=parser.parse("(<= m n)");
         assertEquals("true",resultado );
 
-
+        //Uso de list
+        resultado=parser.parse("(LIST 1 'm 1)");
+        assertEquals("(1, m, 1)",resultado );
     }
 
 }
