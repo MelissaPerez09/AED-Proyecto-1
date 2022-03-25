@@ -126,6 +126,10 @@ class ParserTest {
         //Uso de list
         resultado=parser.parse("(list 1 'm 1)");
         assertEquals("(1, m, 1)",resultado );
+
+        //Uso de atom
+        resultado=parser.parse("(atom '())");
+        assertEquals("true",resultado );
     }
 
 }
