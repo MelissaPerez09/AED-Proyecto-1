@@ -33,7 +33,7 @@ public class Vista {
      * Bienvenida del interprete
      */
     public void inicio(){
-        System.out.println("\n Interprete Lisp v0.3.0 (Grupo 5) AED \n Ingrese '(HELP)' para ayuda. ");
+        System.out.println("\n Interprete Lisp v1.0.0 (Grupo 5) AED \n Ingrese '(HELP)' para ayuda. ");
     }
 
     /**
